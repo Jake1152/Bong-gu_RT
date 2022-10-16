@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertex.h                                           :+:      :+:    :+:   */
+/*   paint.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 20:21:01 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/16 16:03:02 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/16 19:03:09 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct	s_vertex
-{
+#include "mlx_init.h"
 
-}	t_vertext;
+void	paint(t_mlx *mlx)
+{
+	// TODO
+	int	x;
+	int	y;
+	int	*tmp;
+
+	y = -1;
+	while (++y < mlx->height)
+	{
+		x = -1;
+		while (++x < mlx->width)
+		{
+			// TODO x++ 로만 동작하게 효율적으로 바꿔야 함
+			tmp = (int *)(mlx->img.addr + y * mlx->img.len + x * mlx->img.bpp / 8);
+			*tmp = *(int *)(char [4]){1, 1, 1, 1}; // TODO
+		}
+	}
+}

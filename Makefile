@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: min-jo <min-jo@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/08/20 20:45:27 by min-jo           ###   ########.fr        #
+#    Updated: 2022/10/16 19:08:22 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HD_DIR		=	include/
 SRC_DIR		=	src/
 MLX_DIR		=	minilibx_opengl_20191021
 
-SRC_ORI		=	main.c
+SRC_ORI		=	main.c mlx_init.c paint.c parse.c
 BSRC_ORI	=
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))
@@ -26,14 +26,14 @@ OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
 
 CFLAGS		+=	-Wall -Wextra -Werror -MD
-CPPFLAGS	+=	-I $(HD_DIR) $(MLX_DIR)
+CPPFLAGS	+=	-I $(HD_DIR) -I $(MLX_DIR)
 LIBADD		+=	-lm -lmlx -framework OpenGL -framework Appkit #-lpthread
-LDFALGS		+=	-L$(MLX_DIR)
+LDFLAGS		+=	-L$(MLX_DIR)
 
 all:		$(NAME)
 
 %.o:		%.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 $< -c -o $@
 
 $(NAME):	$(OBJ)
 	@make -C $(MLX_DIR) 2> /dev/null
@@ -46,7 +46,7 @@ bonus:		$(BOBJ)
 
 clean:
 	rm -f $(OBJ)
-	r m -f $(BOBJ)
+	rm -f $(BOBJ)
 	rm -f $(OBJ:.o=.d)
 	rm -f $(BOBJ:.o=.d)
 	rm -f bonus
