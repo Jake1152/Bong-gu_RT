@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paint.c                                            :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 18:36:33 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 15:39:48 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/22 18:46:50 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_init.h"
+#ifndef CAMERA_H
+# define CAMERA_H
 
-void	paint(t_mlx *mlx)
+# include "vector.h"
+
+typedef struct s_camera
 {
-	// TODO paint
-	int	x;
-	int	y;
-	int	*tmp;
+	t_point	position;
+	t_vec	orient_x;
+	t_vec	orient_y;
+	t_vec	orient_z;
+	int		fov;
+	float	focal_length;
+}	t_camera;
 
-	y = -1;
-	while (++y < mlx->height)
-	{
-		x = -1;
-		while (++x < mlx->width)
-		{
-			// TODO x++ 로만 동작하게 효율적으로 바꿔야 함
-			tmp = (int *)(mlx->img.addr + y * mlx->img.len + x * mlx->img.bpp / 8);
-			*tmp = *(int *)(char [4]){1, 1, 1, 1}; // TODO 색깔 칠하기
-		}
-	}
-}
+t_camera	newCamera(t_point position, t_vec orient, int fov);
+t_camera	cameraLookAt(t_point position, t_point look, t_vec up, int fov);
+
+#endif

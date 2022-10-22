@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paint.c                                            :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 18:36:33 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 18:24:45 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/22 18:29:14 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_init.h"
+#ifndef VECTOR_H
+# define VECTOR_H
 
-void	paint(t_mlx *mlx)
-{
-	// TODO paint
-	int	x;
-	int	y;
-	int	*tmp;
+# include "vector2.h"
 
-	y = -1;
-	while (++y < mlx->height)
-	{
-		x = -1;
-		while (++x < mlx->width)
-		{
-			// TODO x++ 로만 동작하게 효율적으로 바꿔야 함
-			tmp = (int *)(mlx->img.addr + y * mlx->img.len + x * mlx->img.bpp / 8);
-			*tmp = *(int *)(char [4]){1, 1, 1, 1}; // TODO 색깔 칠하기
-		}
-	}
-}
+float	vdot(t_vec v1, t_vec v2);
+t_vec	vcross(t_vec v1, t_vec v2);
+t_vec	vnorm(t_vec v);
+
+#endif

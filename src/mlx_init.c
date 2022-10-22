@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/16 19:02:30 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:37:28 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	mlx_wrap_key_hook(int keycode, t_mlx *mlx)
 {
 	if (KEY_ESC == keycode)
 		destroy(mlx);
-	// TODO
+	// TODO key hook
 	mlx->painted = 0;
 	return (0);
 }
@@ -34,7 +34,7 @@ int	mlx_wrap_mouse_hook(int button, int x, int y, t_mlx *mlx)
 {
 	if (MOUSE_UP == button)
 		return (0);
-	// TODO
+	// TODO mouse hook
 	(void)x;
 	(void)y;
 	mlx->painted = 0;

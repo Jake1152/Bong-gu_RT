@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vetctor.h                                          :+:      :+:    :+:   */
+/*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/16 19:21:15 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/22 17:37:07 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#ifndef OBJECT_H
+# define OBJECT_H
 
-typedef struct	s_vector
+# include "vector.h"
+# include "light.h"
+
+typedef struct s_sphere
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
-}	t_vector;
+	t_point	position;
+	float	diameter;
+	t_color	color;
+}	t_sphere;
 
-typedef t_vector	t_point;
+typedef struct s_plane
+{
+	t_point	position;
+	t_vec	orient;
+	t_color	color;
+}	t_plane;
 
-t_vector	new_vector(float x, float y, float z, float w);
-t_point		new_point(float x, float y, float z, float w);
+typedef struct s_cylinder
+{
+	t_point	position;
+	t_vec	orient;
+	float	diameter;
+	float	height;
+	t_color	color;
+}	t_cylinder;
 
 #endif

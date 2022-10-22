@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paint.c                                            :+:      :+:    :+:   */
+/*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 18:36:33 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/22 18:28:42 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_init.h"
+#include "vector2.h"
 
-void	paint(t_mlx *mlx)
+t_vec	vadd(t_vec v1, t_vec v2)
 {
-	// TODO paint
-	int	x;
-	int	y;
-	int	*tmp;
+	return (t_vec){
+		v1.x + v2.x,
+		v1.y + v2.y,
+		v1.z + v2.z,
+	};
+}
 
-	y = -1;
-	while (++y < mlx->height)
-	{
-		x = -1;
-		while (++x < mlx->width)
-		{
-			// TODO x++ 로만 동작하게 효율적으로 바꿔야 함
-			tmp = (int *)(mlx->img.addr + y * mlx->img.len + x * mlx->img.bpp / 8);
-			*tmp = *(int *)(char [4]){1, 1, 1, 1}; // TODO 색깔 칠하기
-		}
-	}
+t_vec	vminus(t_vec v1, t_vec v2)
+{
+	return (t_vec){
+		v1.x - v2.x,
+		v1.y - v2.y,
+		v1.z - v2.z,
+	};
+}
+
+t_vec	vmul(t_vec v, float m)
+{
+	return (t_vec){
+		v.x * m,
+		v.y * m,
+		v.z * m,
+	};
 }

@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paint.c                                            :+:      :+:    :+:   */
+/*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 18:36:33 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 16:02:47 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/22 16:13:52 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_init.h"
+#ifndef LIGHT_H
+# define LIGHT_H
 
-void	paint(t_mlx *mlx)
+# include "vector.h"
+
+typedef struct s_light_spot
 {
-	// TODO paint
-	int	x;
-	int	y;
-	int	*tmp;
+	t_point	position;
+	float	bright;
+	t_color	color;
+}	t_light_spot;
 
-	y = -1;
-	while (++y < mlx->height)
-	{
-		x = -1;
-		while (++x < mlx->width)
-		{
-			// TODO x++ 로만 동작하게 효율적으로 바꿔야 함
-			tmp = (int *)(mlx->img.addr + y * mlx->img.len + x * mlx->img.bpp / 8);
-			*tmp = *(int *)(char [4]){1, 1, 1, 1}; // TODO 색깔 칠하기
-		}
-	}
-}
+#endif
