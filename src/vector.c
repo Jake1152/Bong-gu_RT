@@ -5,13 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 18:26:55 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 18:29:22 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/23 19:28:10 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h> // TODO 3fast agorithm
 #include "vector.h"
+
+t_vec	vadd(t_vec v1, t_vec v2)
+{
+	return (t_vec){
+		v1.x + v2.x,
+		v1.y + v2.y,
+		v1.z + v2.z,
+		v1.w + v2.w,
+	};
+}
+
+t_vec	vsub(t_vec v1, t_vec v2)
+{
+	return (t_vec){
+		v1.x - v2.x,
+		v1.y - v2.y,
+		v1.z - v2.z,
+		v1.w - v2.w,
+	};
+}
 
 /*
 * 내적증명
@@ -22,7 +42,8 @@ float	vdot(t_vec v1, t_vec v2)
 	return (
 		v1.x * v2.x +
 		v1.y * v2.y +
-		v1.z * v2.z
+		v1.z * v2.z +
+		v1.w * v2.w
 	);
 }
 
@@ -36,6 +57,7 @@ t_vec	vcross(t_vec v1, t_vec v2)
 		v1.y * v2.z - v1.z * v2.y,
 		v1.z * v2.x - v1.x * v2.z,
 		v1.x * v2.y - v1.y * v2.x,
+		1,
 	};
 }
 

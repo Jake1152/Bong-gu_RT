@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:02:47 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 16:13:52 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/23 19:20:41 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_light_spot
 {
-	t_point	position;
+	t_vec	position;
 	float	bright;
 	t_color	color;
 }	t_light_spot;
