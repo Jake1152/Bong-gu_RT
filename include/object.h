@@ -1,22 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paint.h                                            :+:      :+:    :+:   */
+/*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 18:07:31 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 17:40:34 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/29 16:28:30 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PAINT_H
-# define PAINT_H
+#ifndef OBJECT_H
+# define OBJECT_H
 
-# include "mlx_init.h"
 # include "vector.h"
+# include "light.h"
 
-t_color	ray_color(t_vec	ray);
-void	paint(t_mlx *mlx);
+typedef struct s_sphere
+{
+	t_vec	position;
+	float	diameter;
+	t_color	color;
+}	t_sphere;
+
+typedef struct s_plane
+{
+	t_vec	position;
+	t_vec	orient;
+	t_color	color;
+}	t_plane;
+
+typedef struct s_cylinder
+{
+	t_vec	position;
+	t_vec	orient;
+	float	diameter;
+	float	height;
+	t_color	color;
+}	t_cylinder;
 
 #endif
