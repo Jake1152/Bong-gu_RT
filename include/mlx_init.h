@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:15:26 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 16:08:14 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/29 20:33:27 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include "camera.h"
+# include "object.h"
 
 typedef struct s_img
 {
@@ -27,13 +28,16 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-	void		*ptr;
-	void		*win;
-	t_img		img;
-	int			painted;
-	t_viewport	viewport;
-	t_frustum	frustum;
-	t_mat		camera;
+	void			*ptr;
+	void			*win;
+	t_img			img;
+	int				painted;
+	t_viewport		viewport;
+	t_frustum		frustum;
+	t_mat			camera;
+	t_light_ambient	light_ambient;
+	t_list			lights;
+	t_list			objects;
 }	t_mlx;
 
 typedef enum e_input

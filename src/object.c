@@ -6,14 +6,14 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:21:14 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 19:43:38 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/29 20:30:43 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "object.h"
 
-void	initList(t_list *list)
+void	init_list(t_list *list)
 {
 	list->size = 0;
 	list->head.next = &list->tail;
@@ -24,7 +24,7 @@ void	initList(t_list *list)
 	list->tail.content = NULL;
 }
 
-int	appendNode(t_list *list, void *content)
+int	append_node(t_list *list, void *content)
 {
 	t_node	*node;
 
@@ -35,10 +35,11 @@ int	appendNode(t_list *list, void *content)
 	list->tail.pre = node;
 	node->pre = &list->head;
 	node->next = &list->tail;
+	node->content = content;
 	return (1);
 }
 
-void	clearList(t_list *list)
+void	clear_list(t_list *list)
 {
 	t_node	*node;
 	t_node	*tmp;
