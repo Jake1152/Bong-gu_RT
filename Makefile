@@ -6,7 +6,7 @@
 #    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/10/16 19:08:22 by min-jo           ###   ########.fr        #
+#    Updated: 2022/10/29 14:35:52 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HD_DIR		=	include/
 SRC_DIR		=	src/
 MLX_DIR		=	minilibx_opengl_20191021
 
-SRC_ORI		=	main.c mlx_init.c paint.c parse.c
+SRC_ORI		=	main.c mlx_init.c paint.c parse.c vector.c matrix.c camera.c
 BSRC_ORI	=
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))

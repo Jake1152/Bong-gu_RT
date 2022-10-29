@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:07:31 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/16 18:38:02 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/29 17:40:34 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define PAINT_H
 
 # include "mlx_init.h"
+# include "vector.h"
 
-void	paint(t_mlx *mlx); // TODO
+t_color	ray_color(t_vec	ray);
+void	paint(t_mlx *mlx);
 
 #endif

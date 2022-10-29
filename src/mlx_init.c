@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/22 18:37:28 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/29 16:26:18 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	mlx_wrap_loop_hook(t_mlx *mlx)
 	int	x;
 	int	y;
 
-	// painted 됐으면 이미지 그리고 window로 보내는 거 안 함
+	// painted 됐으면 이미지 그려서 window로 보내는 거 안 함
 	if (mlx->painted)
 		return (0);
 	paint(mlx);
@@ -61,8 +61,6 @@ int	mlx_wrap_loop_hook(t_mlx *mlx)
 void	mlx_wrap_init_run(t_mlx *mlx, int width, int height)
 {
 	mlx->ptr = mlx_init();
-	mlx->width = width;
-	mlx->height = height;
 	mlx->win = mlx_new_window(mlx->ptr, width, height, "Bong-gu_RT");
 	if (NULL == mlx->win)
 		exit(1); // TODO perror

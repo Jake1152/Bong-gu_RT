@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/23 19:28:00 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/29 17:38:37 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ typedef struct s_vec
 	float	w;
 }	t_vec;
 
+# define ZEROVEC (t_vec){0, 0, 0, 0}
+
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	char	r;
+	char	g;
+	char	b;
+	char	t;
 }	t_color;
 
 t_vec	vadd(t_vec v1, t_vec v2);
