@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   parse_rt_camera.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/30 21:25:16 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 22:35:11 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/30 22:42:41 by min-jo            #+#    #+#             */
+/*   Updated: 2022/10/30 22:43:53 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "mlx_init.h"
+#include "parse.h"
 
-void	perror_exit(char *str)
+t_parse	parse_rt_camera(t_mlx *mlx, char c)
 {
-	perror(str);
-	exit(1);
-}
 
-void	perror_exit_arg(char *str)
-{
-	errno = EINVAL;
-	printf("Example: ./miniRT [width:1280] [height:720] [file.rt:test.rt]\n");
-	perror_exit(str);
 }

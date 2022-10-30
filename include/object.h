@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 20:34:41 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/30 23:26:34 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_list
 	t_node	tail;
 }	t_list;
 
-void	init_ist(t_list *list);
+void	init_list(t_list *list);
 int		append_node(t_list *list, void *content);
 void	clear_list(t_list *list);
 

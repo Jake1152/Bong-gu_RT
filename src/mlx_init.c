@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 21:37:30 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/30 21:52:45 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int	destroy(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->ptr, mlx->win);
+	// TODO 모든 list에 담겨있는 malloc free 줘야 함
 	exit(0);
 	return (0);
 }

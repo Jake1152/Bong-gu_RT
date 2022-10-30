@@ -6,7 +6,7 @@
 #    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/10/30 21:45:45 by min-jo           ###   ########.fr        #
+#    Updated: 2022/10/30 23:48:59 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ SRC_DIR		=	src/
 MLX_DIR		=	minilibx_opengl_20191021
 
 SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
-				parse_arg.c parse_rt.c error.c
+				parse_arg.c parse_rt.c error.c\
+				parse_rt_ambient.c parse_rt_camera.c parse_rt_light.c\
+				parse_rt_sphere.c parse_rt_plane.c parse_rt_cylinder.c\
+				parse_rt_ambient2.c
 BSRC_ORI	=
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))
