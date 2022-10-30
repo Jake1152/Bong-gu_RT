@@ -6,12 +6,12 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 16:26:18 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/30 21:37:30 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "mlx_init.h"
+#include "error.h"
 #include "paint.h"
 
 int	destroy(t_mlx *mlx)
@@ -63,10 +63,10 @@ void	mlx_wrap_init_run(t_mlx *mlx, int width, int height)
 	mlx->ptr = mlx_init();
 	mlx->win = mlx_new_window(mlx->ptr, width, height, "Bong-gu_RT");
 	if (NULL == mlx->win)
-		exit(1); // TODO perror
+		perror_exit("Error: mlx window create fail");
 	mlx->img.ptr = mlx_new_image(mlx->ptr, width, height);
 	if (NULL == mlx->img.ptr)
-		exit(1); // TODO perror
+		perror_exit("Error: mlx window image fail");
 	mlx->img.addr = mlx_get_data_addr(
 		mlx->img.ptr,
 		&mlx->img.bpp,

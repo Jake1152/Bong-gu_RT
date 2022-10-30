@@ -6,25 +6,29 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 16:24:52 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/10/30 21:44:00 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "mlx_init.h"
+#include "error.h"
 #include "camera.h"
+#include "parse.h"
 
 int main(int argc, char *argv[])
 {
 	t_mlx	mlx;
 
-	// TODO use arg
-	(void)argv;
-	(void)argc;
-
-	// TODO width, height arg에서 파싱해야 함
-	int	width = 1280;
-	int	height = 960;
-	mlx.viewport = (t_viewport){width, height, width / height};
+	if (argc != 4)
+		perror_exit_arg("Error: arg count is not 3");
+	if (parse_arg(argv[1], &mlx.viewport.width))
+		perror_exit_arg("Error: while parse arg [width]");
+	if (parse_arg(argv[2], &mlx.viewport.height))
+		perror_exit_arg("Error: while parse arg [height]");
+	if (parse_rt(&mlx, argv[3]))
+		perror_exit_arg("Error: while parse .rt file");
+	mlx.viewport.aspect = mlx.viewport.width / mlx.viewport.height;
 
 	// TODO fov는 .rt 파일에서 파싱해야 함
 	float	fov = 70;
