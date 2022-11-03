@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/03 23:12:53 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 00:34:47 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,19 @@ typedef struct s_list
 void	init_list(t_list *list);
 int		append_node(t_list *list, void *content);
 void	clear_list(t_list *list);
+void	*copy_content(t_object_type type, void *content);
+int		copy_list(t_list *dst, t_list *src);
 
 /*
-* object.c
+* object3.c
+*/
+void	*content_light_spot(void* content);
+void	*content_sphere(void* content);
+void	*content_plane(void* content);
+void	*content_cylinder(void* content);
+
+/*
+* object3.c
 */
 int		add_list_lig_ret_space(void *mlx);
 int		add_list_shp_ret_char(void *mlx);

@@ -6,7 +6,7 @@
 #    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/03 23:29:13 by min-jo           ###   ########.fr        #
+#    Updated: 2022/11/04 00:25:26 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR		=	src/
 MLX_DIR		=	minilibx_opengl_20191021
 
 SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
-				object2.c\
+				object2.c object3.c\
 				parse_arg.c parse_rt.c parse_rt2.c error.c\
 				parse_rt_amb.c parse_rt_amb2.c\
 				parse_rt_cam.c parse_rt_cam2.c parse_rt_cam3.c parse_rt_cam4.c\

@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:15:26 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/03 22:12:36 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 00:15:37 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_mlx
 	t_list			objects;
 	t_parse_arg		parse;
 	t_parse_cam		parse_cam;
+	t_list			lights_cpy;
+	t_list			objects_cpy;
 }	t_mlx;
 
 typedef enum e_input

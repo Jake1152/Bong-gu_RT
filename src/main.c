@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 00:02:04 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 01:07:49 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,33 +88,45 @@ void	print_objects(t_list *list)
 	}
 }
 
-int main(int argc, char *argv[])
+static void	arg_check(int argc, char *argv[], t_mlx *mlx)
 {
-	t_mlx	mlx;
-	int		fd;
-
 	if (argc != 4)
 		perror_exit_arg("Error: arg count is not 3");
-	if (parse_arg(argv[2], &mlx.viewport.width))
+	if (parse_arg(argv[2], &mlx->viewport.width))
 		perror_exit_arg("Error: while parse arg [width]");
-	if (parse_arg(argv[3], &mlx.viewport.height))
+	if (parse_arg(argv[3], &mlx->viewport.height))
 		perror_exit_arg("Error: while parse arg [height]");
-	printf("w%d h%d\n", mlx.viewport.width, mlx.viewport.height); //# TODO
-	mlx.viewport.aspect = (double)mlx.viewport.width / mlx.viewport.height;
-	fd = open(argv[1], O_RDONLY);
+	mlx->viewport.aspect = (double)mlx->viewport.width / mlx->viewport.height;
+	printf("w%d h%d\n", mlx->viewport.width, mlx->viewport.height); //# TODO
+}
+
+static void	rt_check(char *file_str, t_mlx *mlx)
+{
+	int	fd;
+
+	fd = open(file_str, O_RDONLY);
 	if (fd == -1)
 		perror_exit_arg("Error: .rt file not opened");
-	init_list(&mlx.lights);
-	init_list(&mlx.objects);
+	init_list(&mlx->lights);
+	init_list(&mlx->objects);
 	if (parse_rt(&mlx, fd))
 	{
 		close(fd);
-		clear_list(&mlx.lights);
-		clear_list(&mlx.lights);
+		clear_list(&mlx->lights);
+		clear_list(&mlx->lights);
 		perror_exit_arg("Error: while parse .rt file");
 	}
 	close(fd);
+}
 
+int	main(int argc, char *argv[])
+{
+	t_mlx	mlx;
+
+	arg_check(argc, argv, &mlx);
+	rt_check(argv[1], &mlx);
+
+	//
 	printf("viewport: w%d h%d a%f\n", mlx.viewport.width, mlx.viewport.height, mlx.viewport.aspect); //# TODO
 	printf("frustum: w%f h%f bl%f,%f,%f,%f\n", mlx.frustum.width, mlx.frustum.height, mlx.frustum.bottom_left.x, mlx.frustum.bottom_left.y, mlx.frustum.bottom_left.z, mlx.frustum.bottom_left.w);
 	printf("camera parse: pos%f,%f,%f ori%f,%f,%f fov%f\n", mlx.parse_cam.pos.x, mlx.parse_cam.pos.y, mlx.parse_cam.pos.z, mlx.parse_cam.ori.x, mlx.parse_cam.ori.y, mlx.parse_cam.ori.z, mlx.parse_cam.fov);
@@ -126,6 +138,15 @@ int main(int argc, char *argv[])
 	printf("col %d,%d,%d\n", mlx.light_ambient.col.r, mlx.light_ambient.col.g, mlx.light_ambient.col.b);
 	print_lights(&mlx.lights);
 	print_objects(&mlx.objects);
+	//
 
+	if (copy_list(&mlx.lights_cpy, &mlx.lights)
+		&& copy_list(&mlx.objects_cpy, &mlx.objects))
+	{
+		clear_list(&mlx.lights);
+		clear_list(&mlx.objects);
+		perror_exit('Error: while malloc lights list copy');
+	}
+	//# TODO transform
 	mlx_wrap_init_run(&mlx, mlx.viewport.width, mlx.viewport.height);
 }
