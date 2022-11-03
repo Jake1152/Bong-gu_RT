@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 23:26:34 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/03 23:12:53 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@
 
 typedef struct s_sphere
 {
-	t_vec	position;
-	float	diameter;
-	t_color	color;
+	t_vec	pos;
+	float	dia;
+	t_color	col;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_vec	position;
-	t_vec	orient;
-	t_color	color;
+	t_vec	pos;
+	t_vec	ori;
+	t_color	col;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec	position;
-	t_vec	orient;
-	float	diameter;
-	float	height;
-	t_color	color;
+	t_vec	pos;
+	t_vec	ori;
+	float	dia;
+	float	hei;
+	t_color	col;
 }	t_cylinder;
 
 typedef enum s_obejct_type
@@ -62,8 +62,19 @@ typedef struct s_list
 	t_node	tail;
 }	t_list;
 
+/*
+* object.c
+*/
 void	init_list(t_list *list);
 int		append_node(t_list *list, void *content);
 void	clear_list(t_list *list);
+
+/*
+* object.c
+*/
+int		add_list_lig_ret_space(void *mlx);
+int		add_list_shp_ret_char(void *mlx);
+int		add_list_pla_ret_char(void *mlx);
+int		add_list_cyl_ret_char(void *mlx);
 
 #endif

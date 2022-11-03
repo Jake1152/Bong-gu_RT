@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 21:25:16 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 22:35:11 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/02 16:14:22 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	perror_exit(char *str)
 void	perror_exit_arg(char *str)
 {
 	errno = EINVAL;
-	printf("Example: ./miniRT [width:1280] [height:720] [file.rt:test.rt]\n");
+	printf("Example: ./miniRT [file.rt:test.rt] [width:1280] [height:720]\n");
 	perror_exit(str);
 }

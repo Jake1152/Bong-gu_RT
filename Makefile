@@ -6,7 +6,7 @@
 #    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/10/30 23:48:59 by min-jo           ###   ########.fr        #
+#    Updated: 2022/11/03 23:29:13 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,20 @@ SRC_DIR		=	src/
 MLX_DIR		=	minilibx_opengl_20191021
 
 SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
-				parse_arg.c parse_rt.c error.c\
-				parse_rt_ambient.c parse_rt_camera.c parse_rt_light.c\
-				parse_rt_sphere.c parse_rt_plane.c parse_rt_cylinder.c\
-				parse_rt_ambient2.c
+				object2.c\
+				parse_arg.c parse_rt.c parse_rt2.c error.c\
+				parse_rt_amb.c parse_rt_amb2.c\
+				parse_rt_cam.c parse_rt_cam2.c parse_rt_cam3.c parse_rt_cam4.c\
+				parse_rt_cam5.c parse_rt_cam6.c\
+				parse_rt_lig.c parse_rt_lig2.c parse_rt_lig3.c parse_rt_lig4.c\
+				parse_rt_lig5.c\
+				parse_rt_sph.c parse_rt_sph2.c parse_rt_sph3.c parse_rt_sph4.c\
+				parse_rt_sph5.c\
+				parse_rt_pla.c parse_rt_pla2.c parse_rt_pla3.c parse_rt_pla4.c\
+				parse_rt_pla5.c parse_rt_pla6.c parse_rt_pla7.c\
+				parse_rt_cyl.c parse_rt_cyl2.c parse_rt_cyl3.c parse_rt_cyl4.c\
+				parse_rt_cyl5.c parse_rt_cyl6.c parse_rt_cyl7.c\
+				parse_rt_cyl8.c
 BSRC_ORI	=
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))
@@ -29,7 +39,7 @@ BSRC		=	$(addprefix $(SRC_DIR), $(BSRC_ORI))
 OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror -MD
+CFLAGS		+=	-Wall -Wextra -Werror -MD -g # -fsanitize=address# TODO
 CPPFLAGS	+=	-I $(HD_DIR) -I $(MLX_DIR)
 LIBADD		+=	-lm -lmlx -framework OpenGL -framework Appkit #-lpthread
 LDFLAGS		+=	-L$(MLX_DIR)

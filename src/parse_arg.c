@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:29:12 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 21:58:21 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/02 22:01:41 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_parse	parse_arg_space(char c, int *num)
 {
 	if ('0' <= c && c <= '9')
 	{
-		*num += *num * 10 + c - '0';
+		*num = c - '0';
 		return (PARSE_ARG_NUM);
 	}
-	else if (c == ' ' || c == '\t')
+	else if (c == ' ')
 		return (PARSE_ARG_SPACE);
 	else
 		return (PARSE_ARG_ERROR);
@@ -30,10 +30,10 @@ t_parse	parse_arg_num(char c, int *num)
 {
 	if ('0' <= c && c <= '9')
 	{
-		*num += *num * 10 + c - '0';
+		*num = *num * 10 + c - '0';
 		return (PARSE_ARG_NUM);
 	}
-	else if (c == ' ' || c == '\t')
+	else if (c == ' ')
 		return (PARSE_ARG_FINISH);
 	else
 		return (PARSE_ARG_ERROR);

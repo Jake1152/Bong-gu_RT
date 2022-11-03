@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:41:11 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 16:23:20 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 00:04:25 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_frustum	newFrustumPerspect(float aspect, float fov)
 	t_frustum	ret;
 
 	ret.height = tan(fov / 2 * M_PI / 180.0) * 2;
-	ret.width = ret.height / aspect;
+	ret.width = ret.height * aspect;
 	ret.bottom_left = (t_vec){
 		.x = -(float)ret.width / 2.0,
 		.y = -(float)ret.height / 2.0,
@@ -48,7 +48,8 @@ t_frustum	newFrustumPerspect(float aspect, float fov)
 * camera tilt를 표현하는 값이 없어서 계산해줘야 함 (5DOF)
 *
 * look 바라보는 시점의 point 임, vector 아님
-* y: 이미 단위 길이이고 서로 수직인 z, x를 외적하므로 결과 벡터는 길이가 1인 단위 벡터여서, normalize 필요 없음
+* y: 이미 단위 길이이고 서로 수직인 z, x를 외적하므로 결과 벡터는 길이가 1인 단위 벡터여서,
+* normalize 필요 없음
 *
 * Cxx Cxy Cxz 0 | 1 0 0 -dx
 * Cyx Cyx Cyz 0 | 0 1 0 -dy
@@ -83,5 +84,9 @@ t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up)
 */
 t_mat	newCamera(t_vec position, t_vec orient)
 {
-	return (cameraLookAt(position, vadd(position, orient), (t_vec){0, 1, 0, 1}));
+	if (orient.x == 0 && orient.y == 0 && orient.z == 0)
+		orient = (t_vec){0, 0, -1, 0};
+	orient = vnorm(orient);
+	return (cameraLookAt(position, vadd(position, orient),
+			(t_vec){0, 1, 0, 1}));
 }

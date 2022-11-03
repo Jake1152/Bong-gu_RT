@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_rt_camera.c                                  :+:      :+:    :+:   */
+/*   parse_rt2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/30 22:42:41 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 22:43:53 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/16 18:29:12 by min-jo            #+#    #+#             */
+/*   Updated: 2022/11/03 23:53:18 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_init.h"
 #include "parse.h"
+#include "mlx_init.h"
 
-t_parse	parse_rt_camera(t_mlx *mlx, char c)
+int	check_last(t_mlx *mlx, t_parse state, char c)
 {
-
+	if (state == PARSE_RT_LINE)
+		return (0);
+	else if ((state == PARSE_RT_CAM_FOV_FLOAT || state == PARSE_RT_CAM_FOV_NUM)
+		&& '0' <= c && c <= '9')
+	{
+		mlx->frustum = newFrustumPerspect(
+				mlx->viewport.aspect,
+				mlx->parse_cam.fov);
+		mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+		return (0);
+	}
+	else
+		return (1);
 }

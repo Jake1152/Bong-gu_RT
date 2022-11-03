@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 17:38:37 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/02 21:21:30 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef struct s_vec
 
 typedef struct s_color
 {
-	char	r;
-	char	g;
-	char	b;
-	char	t;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	t;
 }	t_color;
 
 t_vec	vadd(t_vec v1, t_vec v2);

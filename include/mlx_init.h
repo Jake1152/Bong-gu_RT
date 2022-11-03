@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:15:26 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 20:33:27 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/03 22:12:36 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_parse_arg
+{
+	int	sign;
+	int	div;
+}	t_parse_arg;
+
+typedef struct s_parse_cam
+{
+	t_vec	pos;
+	t_vec	ori;
+	float	fov;
+}	t_parse_cam;
+
 typedef struct s_mlx
 {
 	void			*ptr;
@@ -38,6 +51,8 @@ typedef struct s_mlx
 	t_light_ambient	light_ambient;
 	t_list			lights;
 	t_list			objects;
+	t_parse_arg		parse;
+	t_parse_cam		parse_cam;
 }	t_mlx;
 
 typedef enum e_input

@@ -6,18 +6,20 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/30 21:52:45 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/03 23:51:16 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_init.h"
 #include "error.h"
 #include "paint.h"
+#include "object.h"
 
 int	destroy(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->ptr, mlx->win);
-	// TODO 모든 list에 담겨있는 malloc free 줘야 함
+	clear_list(&mlx->lights);
+	clear_list(&mlx->objects);
 	exit(0);
 	return (0);
 }
@@ -69,10 +71,10 @@ void	mlx_wrap_init_run(t_mlx *mlx, int width, int height)
 	if (NULL == mlx->img.ptr)
 		perror_exit("Error: mlx window image fail");
 	mlx->img.addr = mlx_get_data_addr(
-		mlx->img.ptr,
-		&mlx->img.bpp,
-		&mlx->img.len,
-		&mlx->img.endian);
+			mlx->img.ptr,
+			&mlx->img.bpp,
+			&mlx->img.len,
+			&mlx->img.endian);
 	mlx->painted = 0;
 	mlx_hook(mlx->win, 17, 0L, destroy, mlx);
 	mlx_key_hook(mlx->win, mlx_wrap_key_hook, mlx);
