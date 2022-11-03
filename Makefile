@@ -6,7 +6,7 @@
 #    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/04 00:25:26 by min-jo           ###   ########.fr        #
+#    Updated: 2022/11/04 01:56:39 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
 				parse_rt_pla5.c parse_rt_pla6.c parse_rt_pla7.c\
 				parse_rt_cyl.c parse_rt_cyl2.c parse_rt_cyl3.c parse_rt_cyl4.c\
 				parse_rt_cyl5.c parse_rt_cyl6.c parse_rt_cyl7.c\
-				parse_rt_cyl8.c
+				parse_rt_cyl8.c\
+				transform.c
 BSRC_ORI	=
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))
@@ -39,7 +40,7 @@ BSRC		=	$(addprefix $(SRC_DIR), $(BSRC_ORI))
 OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror -MD -g # -fsanitize=address# TODO
+CFLAGS		+=	-Wall -Wextra -Werror -MD -g # -fsanitize=address # TODO
 CPPFLAGS	+=	-I $(HD_DIR) -I $(MLX_DIR)
 LIBADD		+=	-lm -lmlx -framework OpenGL -framework Appkit #-lpthread
 LDFLAGS		+=	-L$(MLX_DIR)

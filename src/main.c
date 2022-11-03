@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:07:49 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 01:56:09 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "camera.h"
 #include "parse.h"
 #include "object.h"
+#include "transform.h"
 
 /*
 * TODO 이함수 지워야 함
@@ -109,11 +110,15 @@ static void	rt_check(char *file_str, t_mlx *mlx)
 		perror_exit_arg("Error: .rt file not opened");
 	init_list(&mlx->lights);
 	init_list(&mlx->objects);
-	if (parse_rt(&mlx, fd))
+	init_list(&mlx->lights_cpy);
+	init_list(&mlx->objects_cpy);
+	if (parse_rt(mlx, fd))
 	{
 		close(fd);
 		clear_list(&mlx->lights);
 		clear_list(&mlx->lights);
+		clear_list(&mlx->lights_cpy);
+		clear_list(&mlx->objects_cpy);
 		perror_exit_arg("Error: while parse .rt file");
 	}
 	close(fd);
@@ -140,13 +145,6 @@ int	main(int argc, char *argv[])
 	print_objects(&mlx.objects);
 	//
 
-	if (copy_list(&mlx.lights_cpy, &mlx.lights)
-		&& copy_list(&mlx.objects_cpy, &mlx.objects))
-	{
-		clear_list(&mlx.lights);
-		clear_list(&mlx.objects);
-		perror_exit('Error: while malloc lights list copy');
-	}
-	//# TODO transform
+	copy_transform(&mlx);
 	mlx_wrap_init_run(&mlx, mlx.viewport.width, mlx.viewport.height);
 }

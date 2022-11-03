@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/03 23:51:16 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 01:49:42 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 #include "error.h"
 #include "paint.h"
 #include "object.h"
+#include "transform.h"
 
 int	destroy(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->ptr, mlx->win);
 	clear_list(&mlx->lights);
 	clear_list(&mlx->objects);
+	clear_list(&mlx->lights_cpy);
+	clear_list(&mlx->objects_cpy);
 	exit(0);
 	return (0);
 }
@@ -29,6 +32,8 @@ int	mlx_wrap_key_hook(int keycode, t_mlx *mlx)
 	if (KEY_ESC == keycode)
 		destroy(mlx);
 	// TODO key hook
+	// mlx->camera = newCamera(t_vec position, t_vec orient);
+	// copy_transform(mlx);
 	mlx->painted = 0;
 	return (0);
 }
@@ -52,11 +57,13 @@ int	mlx_wrap_loop_hook(t_mlx *mlx)
 	// painted 됐으면 이미지 그려서 window로 보내는 거 안 함
 	if (mlx->painted)
 		return (0);
+	// mlx_mouse_get_pos(mlx->win, &x, &y); // TODO
+	// mlx->camera = newCamera(t_vec position, t_vec orient);
+	// copy_transform(mlx);
 	paint(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 	(void)x;
 	(void)y;
-	// mlx_mouse_get_pos(mlx->win, &x, &y); // TODO
 	mlx->painted = 1;
 	return (0);
 }

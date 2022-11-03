@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:21:14 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:08:23 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 01:41:05 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	*content_light_spot(void* content)
 		origin->col.r,
 		origin->col.g,
 		origin->col.b,
+		origin->col.t,
 	};
 	return (ret);
 }
@@ -57,6 +58,7 @@ void	*content_sphere(void* content)
 		origin->col.r,
 		origin->col.g,
 		origin->col.b,
+		origin->col.t,
 	};
 	return (ret);
 }
@@ -86,6 +88,7 @@ void	*content_plane(void* content)
 		origin->col.r,
 		origin->col.g,
 		origin->col.b,
+		origin->col.t,
 	};
 	return (ret);
 }
@@ -117,6 +120,7 @@ void	*content_cylinder(void* content)
 		origin->col.r,
 		origin->col.g,
 		origin->col.b,
+		origin->col.t,
 	};
 	return (ret);
 }
