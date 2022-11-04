@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:15:26 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 00:15:37 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 12:11:23 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include "camera.h"
 # include "object.h"
+# include "ray.h"
 
 typedef struct s_img
 {
@@ -48,6 +49,7 @@ typedef struct s_mlx
 	t_viewport		viewport;
 	t_frustum		frustum;
 	t_mat			camera;
+	t_ray			ray;
 	t_light_ambient	light_ambient;
 	t_list			lights;
 	t_list			objects;
@@ -55,6 +57,7 @@ typedef struct s_mlx
 	t_parse_cam		parse_cam;
 	t_list			lights_cpy;
 	t_list			objects_cpy;
+	t_hit_record    rec;
 }	t_mlx;
 
 typedef enum e_input

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
+#    By: jim <jim@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/04 01:56:39 by min-jo           ###   ########.fr        #
+#    Updated: 2022/11/04 12:07:08 by jim              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME		=	miniRT
 
 HD_DIR		=	include/
 SRC_DIR		=	src/
+HIT_DIR		=	hit/
+OBJECT_DIR	=	object/
 MLX_DIR		=	minilibx_opengl_20191021
 
 SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
@@ -31,11 +33,19 @@ SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
 				parse_rt_cyl.c parse_rt_cyl2.c parse_rt_cyl3.c parse_rt_cyl4.c\
 				parse_rt_cyl5.c parse_rt_cyl6.c parse_rt_cyl7.c\
 				parse_rt_cyl8.c\
-				transform.c
-BSRC_ORI	=
+				transform.c	\
+				hit.c	\
+				sphere.c
 
+HIT_ORI		=	hit.c
+
+OBJECT_ORI	=	sphere.c
+
+# SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI), \
+# 							$(SRC_DIR)/$(HIT_DIR), $(HIT_ORI), \
+# 							$(SRC_DIR)/$(OBJECT_DIR), $(OBJECT_ORI))
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))
-BSRC		=	$(addprefix $(SRC_DIR), $(BSRC_ORI))
+BSRC		=	$(addprefix $(SRC_DIR), $(SRC_ORI))
 
 OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
