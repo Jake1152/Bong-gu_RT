@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 01:26:50 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 08:27:31 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ float	hit_sphere(t_sphere *sphere, t_vec v)
 	d = b * b - 4 * a * c;
 	if (d < 0)
 		return (-1);
-	else
-		return ((-b - sqrt(d)) / (2.0 * a));
+	d = (-b - sqrt(d)) / (2.0 * a);
+	if (d < 0)
+		return (-1);
+	return (d);
 }
 
 float	hit_plane(t_plane *plane, t_vec v)
@@ -42,7 +44,10 @@ float	hit_plane(t_plane *plane, t_vec v)
 	b = vdot(vsub(ZEROPOS, plane->pos), plane->ori);
 	if (a == 0)
 		return (-1);
-	return (-b / a);
+	b = -b / a;
+	if (b < 0)
+		return (-1);
+	return (b);
 }
 
 float	hit_cylinder(t_cylinder *cylinder, t_vec v)
@@ -66,7 +71,7 @@ float	hit_cylinder(t_cylinder *cylinder, t_vec v)
 	d = (-b - sqrt(d)) / (2.0 * a);
 	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
 	c = vdot(tmp, vmul(cylinder->ori, cylinder->hei));
-	if (0 <= c && c <= cylinder->hei)
+	if (0 <= c && c <= cylinder->hei && d > 0)
 		return (d);
 	else
 		return (-1);
