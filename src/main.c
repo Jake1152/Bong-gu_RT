@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 06:24:20 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 08:42:51 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ void	print_objects(t_list *list)
 
 static void	arg_check(int argc, char *argv[], t_mlx *mlx)
 {
-	if (argc != 4)
+	(void)argv;//# TODO
+	if (argc != 2)
 		perror_exit_arg("Error: arg count is not 3");
-	if (parse_arg(argv[2], &mlx->viewport.width))
+	if (parse_arg("800", &mlx->viewport.width))
 		perror_exit_arg("Error: while parse arg [width]");
-	if (parse_arg(argv[3], &mlx->viewport.height))
+	if (parse_arg("600", &mlx->viewport.height))
 		perror_exit_arg("Error: while parse arg [height]");
 	mlx->viewport.aspect = (double)mlx->viewport.width / mlx->viewport.height;
 	printf("w%d h%d\n", mlx->viewport.width, mlx->viewport.height); //# TODO
