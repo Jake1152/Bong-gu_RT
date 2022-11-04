@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:21:14 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 19:40:01 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 06:21:38 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ void	init_list(t_list *list)
 int	append_node(t_list *list, void *content, t_object_type type)
 {
 	t_node	*node;
+	t_node	*last;
 
 	node = malloc(sizeof(t_node));
 	if (node == NULL)
 		return (-1);
-	list->head.next = node;
-	list->tail.pre = node;
-	node->pre = &list->head;
+	last = list->tail.pre;
+	node->pre = last;
 	node->next = &list->tail;
+	last->next = node;
+	list->tail.pre = node;
 	node->content = content;
 	node->type = type;
+	++list->size;
 	return (0);
 }
 
@@ -53,8 +56,7 @@ void	clear_list(t_list *list)
 		free(tmp->content);
 		free(tmp);
 	}
-	list->head.next = &list->tail;
-	list->tail.pre = &list->head;
+	init_list(list);
 }
 
 void	*copy_content(t_object_type type, void *content)

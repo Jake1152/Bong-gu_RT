@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 01:20:10 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 06:32:43 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ t_vec	vnorm(t_vec v);
 * vector2.c
 */
 t_vec	vmul(t_vec v, float c);
+t_vec	vmag(t_vec v, t_vec m);
 
 #endif

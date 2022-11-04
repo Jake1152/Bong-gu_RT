@@ -6,7 +6,7 @@
 #    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/05 01:52:10 by min-jo           ###   ########.fr        #
+#    Updated: 2022/11/05 07:30:33 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BSRC		=	$(addprefix $(SRC_DIR), $(BSRC_ORI))
 OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror -MD -g #-O3 -fsanitize=address # TODO
+CFLAGS		+=	-Wall -Wextra -Werror -MD -g -O3 #-fsanitize=address # TODO
 CPPFLAGS	+=	-I $(HD_DIR) -I $(MLX_DIR)
 LIBADD		+=	-lm -lmlx -framework OpenGL -framework Appkit #-lpthread
 LDFLAGS		+=	-L$(MLX_DIR)

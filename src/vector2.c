@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 20:30:56 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 06:32:35 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,15 @@ t_vec	vmul(t_vec v, float c)
 		.y = v.y * c,
 		.z = v.z * c,
 		.w = v.w * c,
+	});
+}
+
+t_vec	vmag(t_vec v, t_vec m)
+{
+	return ((t_vec){
+		.x = v.x * m.x,
+		.y = v.y * m.y,
+		.z = v.z * m.z,
+		.w = v.w * m.w,
 	});
 }

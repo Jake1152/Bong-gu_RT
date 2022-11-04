@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 01:28:25 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 06:24:17 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include "paint.h"
 #include "object.h"
 #include "transform.h"
+
+void	print_objects(t_list *list);//#TODO
+void	print_lights(t_list *list);//#TODO
 
 int	destroy(t_mlx *mlx)
 {
@@ -74,6 +77,9 @@ int	mlx_wrap_loop_hook(t_mlx *mlx)
 	copy_transform(mlx);
 	paint(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
+	printf("in hook\n");
+	print_lights(&mlx->lights_cpy);
+	print_objects(&mlx->objects_cpy);
 	mlx->needpaint = 0;
 	return (0);
 }

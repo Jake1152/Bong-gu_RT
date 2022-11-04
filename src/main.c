@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:56:09 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 06:24:20 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_lights(t_list *list)
 
 	cnt = 0;
 	tmp = list->head.next;
+	printf("lise size: %d\n", list->size);
 	while (tmp != &list->tail)
 	{
 		lig = (t_light_spot *)tmp->content;
@@ -53,6 +54,7 @@ void	print_objects(t_list *list)
 
 	cnt = 0;
 	tmp = list->head.next;
+	printf("lise size: %d\n", list->size);
 	while (tmp != &list->tail)
 	{
 		if (tmp->type == TYPE_SPHERE)

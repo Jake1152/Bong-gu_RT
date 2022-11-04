@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 01:10:29 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:53:31 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 07:32:52 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 #include "mlx_init.h"
 #include "object.h"
 
-/*
-* return 값에 아무 의미 없음
-*/
-int	transform_pos(void	*content, t_object_type type, t_mat view)
+void	transform_pos(void	*content, t_object_type type, t_mat view)
 {
 	t_light_spot	*light;
 	t_sphere		*sphere;
@@ -32,13 +29,9 @@ int	transform_pos(void	*content, t_object_type type, t_mat view)
 		sphere = content;
 		sphere->pos = mmulvec(view, sphere->pos);
 	}
-	return (0);
 }
 
-/*
-* return 값에 아무 의미 없음
-*/
-int	transform_pos_ori(void	*content, t_object_type type, t_mat view)
+void	transform_pos_ori(void	*content, t_object_type type, t_mat view)
 {
 	t_plane			*plane;
 	t_cylinder		*cylinder;
@@ -55,36 +48,31 @@ int	transform_pos_ori(void	*content, t_object_type type, t_mat view)
 		cylinder->pos = mmulvec(view, cylinder->pos);
 		cylinder->ori = mmulvec(view, cylinder->ori);
 	}
-	return (0);
 }
 
-/*
-* return 값에 아무 의미 없음
-*/
-int	transform_list(t_list *list, t_mat view)
+void	transform_list(t_list *list, t_mat view)
 {
-	t_node			*node;
+	t_node	*node;
 
 	node = list->head.next;
 	while (node != &list->tail)
 	{
 		if (node->type == TYPE_LIGHT_SPOT)
-			return (transform_pos(node->content, node->type, view));
+			transform_pos(node->content, node->type, view);
 		else if (node->type == TYPE_SPHERE)
-			return (transform_pos(node->content, node->type, view));
+			transform_pos(node->content, node->type, view);
 		else if (node->type == TYPE_PLANE)
-			return (transform_pos_ori(node->content, node->type, view));
+			transform_pos_ori(node->content, node->type, view);
 		else if (node->type == TYPE_CYLINDER)
-			return (transform_pos_ori(node->content, node->type, view));
+			transform_pos_ori(node->content, node->type, view);
 		node = node->next;
 	}
-	return (0);
 }
 
 void	copy_transform(t_mlx *mlx)
 {
 	if (copy_list(&mlx->lights_cpy, &mlx->lights)
-		&& copy_list(&mlx->objects_cpy, &mlx->objects))
+		|| copy_list(&mlx->objects_cpy, &mlx->objects))
 	{
 		clear_list(&mlx->lights);
 		clear_list(&mlx->objects);
