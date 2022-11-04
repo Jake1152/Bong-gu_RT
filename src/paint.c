@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 13:33:22 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/04 13:36:37 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_color	ray_color(t_mlx *mlx, double x, double y)
 
 	mlx->rec = record_init();
 	// 이제 법선 벡터를 매핑해서 얻은 색이 아닌, 앞으로 작성할 phong_lighting 함수의 결과값을 반환한다!
-	if (hit(mlx->objects, &mlx->ray, &mlx->rec))
-		return (phong_lighting(mlx)); // not yet
-	else
+	// if (hit(mlx->objects, &mlx->ray, &mlx->rec))
+	// 	return (phong_lighting(mlx)); // not yet
+	// else
 	{
 		ray = vnorm((t_vec){
 							(double)x / (mlx->viewport.width - 1),

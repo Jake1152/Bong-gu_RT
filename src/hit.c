@@ -1,5 +1,6 @@
 #include "object.h"
 #include "ray.h"
+#include "hit.h"
 #include <math.h>
 
 t_bool      hit(t_list *world, t_ray *ray, t_hit_record *rec)
@@ -13,7 +14,7 @@ t_bool      hit(t_list *world, t_ray *ray, t_hit_record *rec)
     object_node = &(world->head);
     while(object_node)
     {
-        if (hit_obj(world, ray, &temp_rec))
+        if (hit_obj(object_node, ray, &temp_rec))
         {
             hit_anything = TRUE;
             temp_rec.tmax = temp_rec.t;
@@ -30,7 +31,10 @@ t_bool      hit_obj(t_node *object, t_ray *ray, t_hit_record *rec)
     t_bool  hit_result;
 
     hit_result = FALSE;
-    if (object->type == TYPE_SPHERE)
-        hit_result = hit_sphere(object, ray, rec);
+    (void)object;
+    (void)ray;
+    (void)rec;
+    // if (object->type == TYPE_SPHERE)
+    //     hit_result = hit_sphere(object, ray, rec);
     return (hit_result);
 }
