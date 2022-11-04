@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jim <jim@student.42.fr>                    +#+  +:+       +#+         #
+#    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/04 16:47:45 by jim              ###   ########.fr        #
+#    Updated: 2022/11/05 01:52:10 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ HIT_DIR		=	hit/
 OBJECT_DIR	=	object/
 MLX_DIR		=	minilibx_opengl_20191021
 
-SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
-				object2.c object3.c\
+SRC_ORI		=	main.c mlx_init.c paint.c vector.c vector2.c matrix.c camera.c\
+				object.c object2.c object3.c\
 				parse_arg.c parse_rt.c parse_rt2.c error.c\
 				parse_rt_amb.c parse_rt_amb2.c\
 				parse_rt_cam.c parse_rt_cam2.c parse_rt_cam3.c parse_rt_cam4.c\
@@ -33,32 +33,20 @@ SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
 				parse_rt_cyl.c parse_rt_cyl2.c parse_rt_cyl3.c parse_rt_cyl4.c\
 				parse_rt_cyl5.c parse_rt_cyl6.c parse_rt_cyl7.c\
 				parse_rt_cyl8.c\
-				transform.c\
-				hit.c\
-				ray.c\
-				sphere.c\
-				plane.c\
-				vec_utils.c\
-				vec_utils_length.c\
-				vec_utils_mul_divide.c\
-				vec_utils_plus_minus.c\
-				vec_utils_unit.c\
+				transform.c hit.c phong.c shadow.c\
 
 
 HIT_ORI		=	hit.c
 
 OBJECT_ORI	=	sphere.c
 
-# SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI), \
-# 							$(SRC_DIR)/$(HIT_DIR), $(HIT_ORI), \
-# 							$(SRC_DIR)/$(OBJECT_DIR), $(OBJECT_ORI))
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_ORI))
-BSRC		=	$(addprefix $(SRC_DIR), $(SRC_ORI))
+BSRC		=	$(addprefix $(SRC_DIR), $(BSRC_ORI))
 
 OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror -MD -g # -fsanitize=address # TODO
+CFLAGS		+=	-Wall -Wextra -Werror -MD -g #-O3 -fsanitize=address # TODO
 CPPFLAGS	+=	-I $(HD_DIR) -I $(MLX_DIR)
 LIBADD		+=	-lm -lmlx -framework OpenGL -framework Appkit #-lpthread
 LDFLAGS		+=	-L$(MLX_DIR)
@@ -66,15 +54,15 @@ LDFLAGS		+=	-L$(MLX_DIR)
 all:		$(NAME)
 
 %.o:		%.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 $< -c -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@
 
 $(NAME):	$(OBJ)
 	@make -C $(MLX_DIR) 2> /dev/null
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LIBADD) -O3 $^ -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LIBADD) $^ -o $@
 
 bonus:		$(BOBJ)
 	@make -C $(MLX_DIR) 2> /dev/null
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LIBADD) -O3 $^ -o $(NAME)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LIBADD) $^ -o $(NAME)
 	touch bonus
 
 clean:

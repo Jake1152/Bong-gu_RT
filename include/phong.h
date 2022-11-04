@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.h                                           :+:      :+:    :+:   */
+/*   phong.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 19:35:35 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 20:41:27 by min-jo           ###   ########.fr       */
+/*   Created: 2022/11/04 23:28:32 by min-jo            #+#    #+#             */
+/*   Updated: 2022/11/05 01:27:45 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAT_H
-# define MAT_H
+#ifndef PHONG_H
+# define PHONG_H
 
-# include "vector.h"
-
-typedef struct s_mat
-{
-	t_vec	vecs[4];
-}	t_mat;
-
-t_mat	mtranspose(t_mat m);
-t_mat	mmul(t_mat m1, t_mat m2);
-t_vec	mmulvec(t_mat m, t_vec v);
-t_mat	mtranslate(t_vec v);
-t_mat	mrotate(float angle, t_vec v);
+// TODO
+// phong_ambient();
+// phong_diffuse();
+// phong_specular();
 
 #endif

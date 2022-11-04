@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:15:26 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 12:11:23 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/04 21:28:31 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "mlx.h"
 # include "camera.h"
 # include "object.h"
-# include "ray.h"
 
 typedef struct s_img
 {
@@ -40,16 +39,22 @@ typedef struct s_parse_cam
 	float	fov;
 }	t_parse_cam;
 
+typedef struct s_mouse
+{
+	int	x;
+	int	y;
+}	t_mouse;
+
 typedef struct s_mlx
 {
 	void			*ptr;
 	void			*win;
 	t_img			img;
-	int				painted;
+	int				needpaint;
+	int				move;
 	t_viewport		viewport;
 	t_frustum		frustum;
 	t_mat			camera;
-	t_ray			ray;
 	t_light_ambient	light_ambient;
 	t_list			lights;
 	t_list			objects;
@@ -57,13 +62,16 @@ typedef struct s_mlx
 	t_parse_cam		parse_cam;
 	t_list			lights_cpy;
 	t_list			objects_cpy;
-	t_hit_record    rec;
+	t_mouse			tmp_mouse;
+	t_mouse			mouse;
 }	t_mlx;
 
 typedef enum e_input
 {
-	MOUSE_UP = 4,
-	MOUSE_DOWN = 5,
+	MOUSE_LEFT = 1,
+	MOUSE_RIGHT = 2,
+	// MOUSE_UP = 4,
+	// MOUSE_DOWN = 5,
 	// KEY_C = 8,
 	// KEY_M = 46,
 	KEY_ESC = 53,

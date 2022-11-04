@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:49:42 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 01:28:25 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,52 @@ int	destroy(t_mlx *mlx)
 
 int	mlx_wrap_key_hook(int keycode, t_mlx *mlx)
 {
-	if (KEY_ESC == keycode)
+	if (keycode == KEY_ESC)
 		destroy(mlx);
-	// TODO key hook
-	// mlx->camera = newCamera(t_vec position, t_vec orient);
-	// copy_transform(mlx);
-	mlx->painted = 0;
+	else if (keycode == KEY_UP)
+		mlx->parse_cam.pos = vadd(mlx->parse_cam.pos,
+			vmul(mlx->parse_cam.ori, 0.1));
+	else if (keycode == KEY_DOWN)
+		mlx->parse_cam.pos = vadd(mlx->parse_cam.pos,
+			vmul(mlx->parse_cam.ori, -0.1));
+	mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+	copy_transform(mlx);
+	mlx->needpaint = 1;
 	return (0);
 }
 
 int	mlx_wrap_mouse_hook(int button, int x, int y, t_mlx *mlx)
 {
-	if (MOUSE_UP == button)
-		return (0);
-	// TODO mouse hook
+	if (button == MOUSE_LEFT)
+		mlx->move = 1;
+	else if (button == MOUSE_RIGHT)
+	{
+		mlx->move = 0;
+		mlx->mouse = mlx->tmp_mouse;
+	}
 	(void)x;
 	(void)y;
-	mlx->painted = 0;
 	return (0);
 }
 
+/*
+* paint 하지 않아도 되고, 마우스 안 움직이면 다시 안 그림
+*/
 int	mlx_wrap_loop_hook(t_mlx *mlx)
 {
-	int	x;
-	int	y;
+	// t_mat	x;
+	// t_mat	y;
 
-	// painted 됐으면 이미지 그려서 window로 보내는 거 안 함
-	if (mlx->painted)
+	if (mlx->move)
+		mlx_mouse_get_pos(mlx->win, &mlx->tmp_mouse.x, &mlx->tmp_mouse.y);
+	if (!mlx->needpaint && !mlx->move)
 		return (0);
-	// mlx_mouse_get_pos(mlx->win, &x, &y); // TODO
-	// mlx->camera = newCamera(t_vec position, t_vec orient);
-	// copy_transform(mlx);
+	// mmulvec(mrotate(), ); TODO
+	mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+	copy_transform(mlx);
 	paint(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
-	(void)x;
-	(void)y;
-	mlx->painted = 1;
+	mlx->needpaint = 0;
 	return (0);
 }
 
@@ -82,7 +92,8 @@ void	mlx_wrap_init_run(t_mlx *mlx, int width, int height)
 			&mlx->img.bpp,
 			&mlx->img.len,
 			&mlx->img.endian);
-	mlx->painted = 0;
+	mlx->needpaint = 1;
+	mlx->mouse = (t_mouse){width / 2, height / 2};
 	mlx_hook(mlx->win, 17, 0L, destroy, mlx);
 	mlx_key_hook(mlx->win, mlx_wrap_key_hook, mlx);
 	mlx_mouse_hook(mlx->win, mlx_wrap_mouse_hook, mlx);

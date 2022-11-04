@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 12:50:35 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/04 20:16:30 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,10 @@
 # include "vector.h"
 # include "light.h"
 
-# define EPSILON 1e-6
-
-typedef int	t_bool;
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE,
-}			t_e_bool;
-
 typedef struct s_sphere
 {
 	t_vec	pos;
 	float	dia;
-	float	dia_squre;
 	t_color	col;
 }	t_sphere;
 
@@ -73,33 +62,11 @@ typedef struct s_list
 	t_node	tail;
 }	t_list;
 
-typedef struct s_hit_record
-{
-	t_vec		point;
-	t_vec		normal;
-	double		tmin;
-	double		tmax;
-	double		t;
-	t_bool		front_face;
-	t_vec		albedo;
-}				t_hit_record;
-
-typedef struct s_equation_info
-{
-    double  a;
-    double  half_b;
-    double  c;
-    double  discriminant;
-    double  sqrtd;
-    double  root;
-}				t_equation_info;
-
-
 /*
 * object.c
 */
 void	init_list(t_list *list);
-int		append_node(t_list *list, void *content);
+int		append_node(t_list *list, void *content, t_object_type type);
 void	clear_list(t_list *list);
 void	*copy_content(t_object_type type, void *content);
 int		copy_list(t_list *dst, t_list *src);

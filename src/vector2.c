@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.h                                           :+:      :+:    :+:   */
+/*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 19:35:35 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 20:41:27 by min-jo           ###   ########.fr       */
+/*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
+/*   Updated: 2022/11/04 20:30:56 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAT_H
-# define MAT_H
+#include "vector.h"
 
-# include "vector.h"
-
-typedef struct s_mat
+t_vec	vmul(t_vec v, float c)
 {
-	t_vec	vecs[4];
-}	t_mat;
-
-t_mat	mtranspose(t_mat m);
-t_mat	mmul(t_mat m1, t_mat m2);
-t_vec	mmulvec(t_mat m, t_vec v);
-t_mat	mtranslate(t_vec v);
-t_mat	mrotate(float angle, t_vec v);
-
-#endif
+	return ((t_vec){
+		.x = v.x * c,
+		.y = v.y * c,
+		.z = v.z * c,
+		.w = v.w * c,
+	});
+}

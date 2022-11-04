@@ -6,12 +6,18 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 19:36:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 17:53:13 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 01:30:14 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "matrix.h"
 #include "vector.h"
+
+/*
+* M_PI 상수를 사용하기 위한 define
+*/
+#define _USE_MATH_DEFINES
 
 t_mat	mtranspose(t_mat m)
 {
@@ -61,6 +67,31 @@ t_mat	mtranslate(t_vec v)
 	ret.vecs[0] = (t_vec){1, 0, 0, v.x};
 	ret.vecs[1] = (t_vec){0, 1, 0, v.y};
 	ret.vecs[2] = (t_vec){0, 0, 1, v.z};
+	ret.vecs[3] = (t_vec){0, 0, 0, 1};
+	return (ret);
+}
+
+t_mat	mrotate(float angle, t_vec v)
+{
+	t_mat	ret;
+	float	cos_ang;
+	float	sin_ang;
+
+	v = vnorm(v);
+	cos_ang = cos(angle * M_PI / 180.0);
+	sin_ang = sin(angle * M_PI / 180.0);
+	ret.vecs[0] = (t_vec){
+		cos_ang + v.x * v.x * (1 - cos_ang),
+		v.x * v.y * (1 - cos_ang) - v.z * sin_ang,
+		v.x * v.z * (1 - cos_ang) + v.y * sin_ang, 0};
+	ret.vecs[1] = (t_vec){
+		v.y * v.x * (1 - cos_ang) + v.z * sin_ang,
+		cos_ang + v.y * v.y * (1 - cos_ang),
+		v.y * v.z * (1 - cos_ang) - v.x * sin_ang, 0};
+	ret.vecs[2] = (t_vec){
+		v.z * v.x * (1 - cos_ang) - v.y * sin_ang,
+		v.z * v.y * (1 - cos_ang) + v.x * sin_ang,
+		cos_ang + v.z * v.z * (1 - cos_ang), 0};
 	ret.vecs[3] = (t_vec){0, 0, 0, 1};
 	return (ret);
 }

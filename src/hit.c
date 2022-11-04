@@ -1,44 +1,85 @@
-#include "object.h"
-#include "ray.h"
-#include "hit.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
+/*   Updated: 2022/11/05 01:26:50 by min-jo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <math.h>
-// debug
-#include <stdio.h>
+#include "object.h"
+#include "hit.h"
 
-/*
-- 레이가 도형에 부딪친것은 알아도 색상은 모른다.
-*/
-t_bool      hit(t_list *world, t_ray *ray, t_hit_record *rec)
+float	hit_sphere(t_sphere *sphere, t_vec v)
 {
-    t_bool          hit_anything;
-    t_hit_record    temp_rec;
-    t_node          *object_node;
+	float	a;
+	float	b;
+	float	c;
+	t_vec	tmp;
+	float	d;
 
-    temp_rec = *rec;
-    hit_anything = FALSE;
-    object_node = &(world->head);
-    while(object_node)
-    {
-        if (hit_obj(object_node, ray, &temp_rec))
-        {
-            // printf("hitted in hit()\n\n");
-            ((t_sphere *)(object_node->content))->col;
-            hit_anything = TRUE;
-            temp_rec.tmax = temp_rec.t;
-            *rec = temp_rec;
-        }
-        object_node = object_node->next;
-    }
-    return (hit_anything);
+	a = vdot(v, v);
+	b = vdot(vmul(v ,2), vsub(ZEROPOS, sphere->pos));
+	tmp = vsub(ZEROPOS, sphere->pos);
+	c = vdot(tmp, tmp) - sphere->dia * sphere->dia;
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (-1);
+	else
+		return ((-b - sqrt(d)) / (2.0 * a));
 }
 
-// hit_obj는 오브젝트 타입에 맞는 hit함수로 연결해주는 관문
-t_bool      hit_obj(t_node *object, t_ray *ray, t_hit_record *rec)
+float	hit_plane(t_plane *plane, t_vec v)
 {
-    t_bool  hit_result;
+	float	a;
+	float	b;
 
-    hit_result = FALSE;
-    if (object->type == TYPE_CYLINDER)
-        hit_result = hit_sphere(object, ray, rec);
-    return (hit_result);
+	a = vdot(v, plane->ori);
+	b = vdot(vsub(ZEROPOS, plane->pos), plane->ori);
+	if (a == 0)
+		return (-1);
+	return (-b / a);
+}
+
+float	hit_cylinder(t_cylinder *cylinder, t_vec v)
+{
+	float	a;
+	float	b;
+	float	c;
+	t_vec	tmp;
+	float	d;
+
+	a = vdot(v, cylinder->ori);
+	a = vdot(v, v) - a * a;
+	tmp = vsub(ZEROPOS, cylinder->pos);
+	b = vdot(v, tmp)
+		- vdot(v, cylinder->ori) * vdot(tmp, cylinder->ori);
+	c = vdot(tmp, tmp) - vdot(tmp, cylinder->ori)
+		- cylinder->dia * cylinder->dia;
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (-1);
+	d = (-b - sqrt(d)) / (2.0 * a);
+	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
+	c = vdot(tmp, vmul(cylinder->ori, cylinder->hei));
+	if (0 <= c && c <= cylinder->hei)
+		return (d);
+	else
+		return (-1);
+}
+
+float	hit(t_node *node, t_vec v)
+{
+	if (node->type == TYPE_SPHERE)
+		return (hit_sphere((t_sphere *)node->content, v));
+	else if (node->type == TYPE_PLANE)
+		return (hit_plane((t_plane *)node->content, v));
+	else if (node->type == TYPE_CYLINDER)
+		return (hit_cylinder((t_cylinder *)node->content, v));
+	else
+		return (-1);
 }

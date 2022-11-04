@@ -3,78 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   paint.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 14:52:16 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/05 01:47:22 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <float.h>
 #include "mlx_init.h"
 #include "vector.h"
 #include "camera.h"
 #include "object.h"
 #include "hit.h"
-#include <stdio.h>
 
-/*
-t_color	ray_color(t_vec *ray)
+#include <stdio.h> //# TODO
+
+t_color	get_color(t_node *node)
 {
-	double	t;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
 
-	t = 0.5 * (ray.y + 1.0);
-	return ((t_color){
-		(1 - t) * 1 + t * 0.5 * 255,
-		(1 - t) * 1 + t * 0.7 * 255,
-		(1 - t) * 1 + t * 1.0 * 255,
-		1,
-	});
-}
-*/
-
-static t_hit_record	record_init()
-{
-	t_hit_record	record;
-
-	record.tmin = EPSILON;
-	record.tmax = INFINITY;
-	return (record);
-}
-
-// void set_color(color, t_rgb_color r, t_rgb_color g, t_rgb_color b, t_rgb_color t)
-t_color	ray_color(t_mlx *mlx, double x, double y)
-{
-	double	t;
-	t_vec	ray;
-	t_color	color;
-
-	ray = vnorm((t_vec){
-						(double)x / (mlx->viewport.width - 1),
-						(double)y / (mlx->viewport.height - 1),
-						1,
-						0,
-					});
-	t = 0.5 * (ray.y + 1.0);
-	mlx->rec = record_init();
-	// 이제 법선 벡터를 매핑해서 얻은 색이 아닌, 앞으로 작성할 phong_lighting 함수의 결과값을 반환한다!
-	// return (phong_lighting(mlx)); // not yet
-	if (hit(&(mlx->objects), &(mlx->ray), &(mlx->rec)))
+	if (node->type == TYPE_SPHERE)
 	{
-		// printf("hitted!!!!\n");
-		color.r = 255;
-		color.g = 0;
-		color.b = 0;
-		color.t = 1;
+		sphere = node->content;
+		return (sphere->col);
+	}
+	else if (node->type == TYPE_PLANE)
+	{
+		plane = node->content;
+		return (plane->col);
+	}
+	else if (node->type == TYPE_CYLINDER)
+	{
+		cylinder = node->content;
+		return (cylinder->col);
 	}
 	else
+		return ((t_color){0, 0, 0, 1});
+}
+
+/*
+* 물체들 반복문을 돌면서 z값이 가장 카메라와 가까운 좌표를 얻음
+* 그 위치에 그림자가 만들어지는지 확인하고
+* 안 만들어지면 phong 적용
+*/
+t_color	ray_color(t_mlx *mlx, t_vec v)
+{
+	float	min;
+	float	t;
+	t_node	*node;
+	t_node	*min_node;
+
+	min = FLT_MAX;
+	node = mlx->objects.head.next;
+	while (node != &mlx->objects.tail)
 	{
-		color.r = (1 - t) * 1 + t * 0.5 * 255;
-		color.g = (1 - t) * 1 + t * 0.7 * 255;
-		color.b = (1 - t) * 1 + t * 1.0 * 255;
-		color.t = 1;
-	};
-	return (color); 
+		t = hit(node, v);
+		if (t > 0 && t < min)
+		{
+			min = t;
+			min_node = node;
+		}
+		node = node->next;
+	}
+	// t_color c = get_color(min_node); //# TODO
+	// printf("ray:%f,%f,%f,%f\n", v.x, v.y, v.z, v.w);
+	// printf("color:%d,%d,%d,%d\n", c.r, c.g, c.b, c.t);
+	return (get_color(min_node));
+	// 그림자 먼저 되는지 확인 TODO
+	// phong TODO 255 넘는지 0보다 작은지 체크
 }
 
 /*
@@ -93,15 +93,15 @@ void	paint(t_mlx *mlx)
 		x = -1;
 		while (++x < mlx->viewport.width)
 		{
+			printf("y:%d,x:%d\n", y, x); //# TODO
 			tmp = (int *)(mlx->img.addr + y * mlx->img.len
 					+ x * mlx->img.bpp / 8);
-			// color = ray_color(vnorm((t_vec){
-			// 			(double)x / (mlx->viewport.width - 1),
-			// 			(double)y / (mlx->viewport.height - 1),
-			// 			1,
-			// 			0,
-			// 		}));
-			color = ray_color(mlx, x, y);
+			color = ray_color(mlx, vnorm((t_vec){
+						(double)x / mlx->viewport.width * mlx->frustum.width,
+						(double)y / mlx->viewport.height * mlx->frustum.height,
+						-1,
+						0,
+					}));
 			*tmp = *(int *)(char [4]){color.b, color.g, color.r, color.t};
 		}
 	}

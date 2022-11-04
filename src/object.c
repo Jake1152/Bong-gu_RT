@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:21:14 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:17:56 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/04 19:40:01 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_list(t_list *list)
 	list->tail.content = NULL;
 }
 
-int	append_node(t_list *list, void *content)
+int	append_node(t_list *list, void *content, t_object_type type)
 {
 	t_node	*node;
 
@@ -36,6 +36,7 @@ int	append_node(t_list *list, void *content)
 	node->pre = &list->head;
 	node->next = &list->tail;
 	node->content = content;
+	node->type = type;
 	return (0);
 }
 
@@ -85,7 +86,7 @@ int	copy_list(t_list *dst, t_list *src)
 			clear_list(dst);
 			return (-1);
 		}
-		append_node(dst, content);
+		append_node(dst, content, node->type);
 		node = node->next;
 	}
 	return (0);
