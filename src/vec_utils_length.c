@@ -1,3 +1,4 @@
+#include <math.h>
 #include "utils.h"
 
 // 벡터 길이 제곱

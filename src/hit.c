@@ -2,7 +2,12 @@
 #include "ray.h"
 #include "hit.h"
 #include <math.h>
+// debug
+#include <stdio.h>
 
+/*
+- 레이가 도형에 부딪친것은 알아도 색상은 모른다.
+*/
 t_bool      hit(t_list *world, t_ray *ray, t_hit_record *rec)
 {
     t_bool          hit_anything;
@@ -16,6 +21,8 @@ t_bool      hit(t_list *world, t_ray *ray, t_hit_record *rec)
     {
         if (hit_obj(object_node, ray, &temp_rec))
         {
+            // printf("hitted in hit()\n\n");
+            ((t_sphere *)(object_node->content))->col;
             hit_anything = TRUE;
             temp_rec.tmax = temp_rec.t;
             *rec = temp_rec;
@@ -31,10 +38,7 @@ t_bool      hit_obj(t_node *object, t_ray *ray, t_hit_record *rec)
     t_bool  hit_result;
 
     hit_result = FALSE;
-    (void)object;
-    (void)ray;
-    (void)rec;
-    // if (object->type == TYPE_SPHERE)
-    //     hit_result = hit_sphere(object, ray, rec);
+    if (object->type == TYPE_CYLINDER)
+        hit_result = hit_sphere(object, ray, rec);
     return (hit_result);
 }

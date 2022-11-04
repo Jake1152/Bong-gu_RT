@@ -6,7 +6,7 @@
 #    By: jim <jim@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/04 12:07:08 by jim              ###   ########.fr        #
+#    Updated: 2022/11/04 16:47:45 by jim              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,17 @@ SRC_ORI		=	main.c mlx_init.c paint.c vector.c matrix.c camera.c object.c\
 				parse_rt_cyl.c parse_rt_cyl2.c parse_rt_cyl3.c parse_rt_cyl4.c\
 				parse_rt_cyl5.c parse_rt_cyl6.c parse_rt_cyl7.c\
 				parse_rt_cyl8.c\
-				transform.c	\
-				hit.c	\
-				sphere.c
+				transform.c\
+				hit.c\
+				ray.c\
+				sphere.c\
+				plane.c\
+				vec_utils.c\
+				vec_utils_length.c\
+				vec_utils_mul_divide.c\
+				vec_utils_plus_minus.c\
+				vec_utils_unit.c\
+
 
 HIT_ORI		=	hit.c
 

@@ -27,20 +27,3 @@ t_vec      vdivide(t_vec vec, float t)
 
     return vec;
 }
-
-// 벡터 내적
-float      vdot(t_vec vec, t_vec vec2)
-{
-    return (vec.x * vec2.x + vec.y * vec2.y + vec.z * vec2.z);
-}
-
-// 벡터 외적
-t_vec      vcross(t_vec vec, t_vec vec2)
-{
-    t_vec new;
-
-    new.x = vec.y * vec2.z - vec.z * vec2.y;
-    new.y = vec.z * vec2.x - vec.x * vec2.z;
-    new.z = vec.x * vec2.y - vec.y * vec2.x;
-    return (new);
-}

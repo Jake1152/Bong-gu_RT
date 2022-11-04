@@ -9,4 +9,6 @@ typedef struct s_ray
     t_vec   dir;
 }       	t_ray;
 
+t_vec   ray_at(t_ray *ray, double t);
+
 #endif
