@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 08:42:51 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/05 10:04:55 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,39 @@ static void	arg_check(int argc, char *argv[], t_mlx *mlx)
 	printf("w%d h%d\n", mlx->viewport.width, mlx->viewport.height); //# TODO
 }
 
+static str_len(char *str)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (*str)
+	{
+		++cnt;
+		++str;
+	}
+	return (cnt);
+}
+
+static	is_end_rt(char *str)
+{
+	int	len;
+
+	len = str_len(str);
+	if (str[len-1] != 't')
+		return (0);
+	if (str[len-2] != 'r')
+		return (0);
+	if (str[len-3] != '.')
+		return (0);
+	return (1);
+}
+
 static void	rt_check(char *file_str, t_mlx *mlx)
 {
 	int	fd;
 
+	if (!is_end_rt(file_str))
+		perror_exit_arg("Error: file is not end with .rt");
 	fd = open(file_str, O_RDONLY);
 	if (fd == -1)
 		perror_exit_arg("Error: .rt file not opened");
