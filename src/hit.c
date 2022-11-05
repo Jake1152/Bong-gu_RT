@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 03:07:19 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 03:56:34 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	hit_plane(t_plane *plane, t_vec v, float *t)
 	if (a == 0)
 		return (0);
 	b = -b / a;
-	if (b < 0)
+	if (b < FLT_EPSILON || *t < b)
 		return (0);
 	*t = b;
 	return (1);
@@ -61,14 +61,14 @@ int	hit_plane(t_plane *plane, t_vec v, float *t)
 int	is_cylinder_in(float root, t_vec v, t_cylinder *cylinder)
 {
 	t_vec	tmp;
-	float	c;
+	float	height;
 
 	tmp = vsub(vadd(vmul(v, root), ZEROPOS), cylinder->pos);
-	c = vdot(tmp, cylinder->ori);
-	if (0 < c && c < cylinder->hei && root > 0)
-		return (1);
-	else
+	height = vdot(tmp, cylinder->ori);
+	if (height < 0 || height > cylinder->hei)
 		return (0);
+	else
+		return (1);
 }
 
 int	hit_cylinder(t_cylinder *cylinder, t_vec v, float *t)
@@ -79,8 +79,7 @@ int	hit_cylinder(t_cylinder *cylinder, t_vec v, float *t)
 	float	d;
 	t_vec	tmp;
 
-	a = vdot(v, cylinder->ori);
-	a = vdot(v, v) - a * a;
+	a = vdot(v, v) - vdot(v, cylinder->ori) * vdot(v, cylinder->ori);
 	tmp = vsub(ZEROPOS, cylinder->pos);
 	b = vdot(v, tmp)
 		- vdot(v, cylinder->ori) * vdot(tmp, cylinder->ori);
@@ -91,10 +90,10 @@ int	hit_cylinder(t_cylinder *cylinder, t_vec v, float *t)
 		return (0);
 	d = sqrt(d);
 	c = (-b - d) / a;
-	if (!is_cylinder_in(c, v, cylinder) && (c < FLT_EPSILON || *t < c))
+	if (!is_cylinder_in(c, v, cylinder) || (c < FLT_EPSILON || *t < c))
 	{
 		c = (-b + d) / a;
-		if (!is_cylinder_in(c, v, cylinder) && (c < FLT_EPSILON || *t < c))
+		if (!is_cylinder_in(c, v, cylinder) || (c < FLT_EPSILON || *t < c))
 			return (0);
 	}
 	*t = c;
@@ -110,5 +109,5 @@ int	hit(t_node *node, t_vec v, float *t)
 	else if (node->type == TYPE_CYLINDER)
 		return (hit_cylinder((t_cylinder *)node->content, v, t));
 	else
-		return (-1);
+		return (0);
 }
