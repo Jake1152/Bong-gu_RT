@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 01:40:26 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 03:48:34 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_vec	vmul(t_vec v, float c)
 t_color	cadd(t_color c1, t_color c2)
 {
 	return ((t_color){
-		.r = c1.r + c2.r,
-		.g = c1.g + c2.g,
-		.b = c1.b + c2.b,
+		.r = ovfadd(c1.r, c2.r),
+		.g = ovfadd(c1.g, c2.g),
+		.b = ovfadd(c1.b, c2.b),
 		.t = 0,
 	});
 }

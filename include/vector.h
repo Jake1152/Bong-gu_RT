@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 01:41:43 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 03:46:58 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,10 @@ t_vec	vmul(t_vec v, float c);
 t_color	cadd(t_color c1, t_color c2);
 t_color	cmul(t_color c, float t);
 t_color	cdot(t_color object, t_color light);
+
+/*
+* vector3.c
+*/
+unsigned char	ovfadd(unsigned char c1, unsigned char c2);
 
 #endif
