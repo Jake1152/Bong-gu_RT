@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:29:21 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 22:33:30 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 01:59:25 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_vec	get_normal(t_node *node, t_vec p)
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	t_vec		tmp;
 
 	if (node == NULL)
 		return ((t_vec){0, 0, 0, 0});
@@ -38,23 +39,21 @@ t_vec	get_normal(t_node *node, t_vec p)
 	}
 	else if (node->type == TYPE_CYLINDER)
 	{
-		// TODO
 		cylinder = node->content;
-		return (vnorm(vsub(p, cylinder->pos)));
+		tmp = vnorm(vcross(vnorm(cylinder->ori), vnorm(vsub(p, cylinder->pos))));
+		return (vnorm(vcross(tmp, cylinder->ori)));
 	}
 	else
 		return ((t_vec){0, 0, 0, 0});
 }
 
-t_color	phong(t_list *lights_cpy, t_node *object_node, t_vec v, t_vec p)
+t_color	phong(t_list *lights_cpy, t_vec norm, t_vec p)
 {
 	t_color			ret;
 	t_node			*node;
 	t_light_spot	*light;
 	t_vec			vlight;
-	t_vec			norm;
 
-	norm = get_normal(object_node, p);
 	ret = (t_color){0, 0, 0, 0};
 	node = lights_cpy->head.next;
 	while (node != &lights_cpy->tail)
@@ -63,7 +62,7 @@ t_color	phong(t_list *lights_cpy, t_node *object_node, t_vec v, t_vec p)
 		if (node->type == TYPE_LIGHT_SPOT)
 		{
 			light = node->content;
-			ret = cadd(ret, cmul(get_color(object_node), fmaxf(vdot(norm, vlight), 0.0) * light->bri));
+			ret = cadd(ret, cmul(light->col, fmaxf(vdot(norm, vlight), 0.0) * light->bri));
 		}
 		node = node->next;
 	}

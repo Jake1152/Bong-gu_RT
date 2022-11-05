@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 22:39:08 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 02:03:49 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,31 @@ t_color	get_color(t_node *node)
 		return ((t_color){0, 0, 0, 0});
 }
 
+t_node	*find_closest(t_mlx *mlx, t_vec v, t_vec *p)
+{
+	float	min;
+	float	t;
+	t_node	*node;
+	t_node	*min_node;
+
+	min = FLT_MAX;
+	t = FLT_MAX;
+	min_node = NULL;
+	node = mlx->objects_cpy.head.next;
+	while (node != &mlx->objects_cpy.tail)
+	{
+		t = hit(node, v);
+		if (0 < t && t < min) // TODO
+		{
+			min = t;
+			min_node = node;
+		}
+		node = node->next;
+	}
+	*p = vadd(vmul(v, t), ZEROPOS);
+	return (min_node);
+}
+
 /*
 * 물체들 반복문을 돌면서 z값이 가장 카메라와 가까운 좌표를 얻음
 * 그 위치에 그림자가 만들어지는지 확인하고
@@ -56,37 +81,22 @@ t_color	get_color(t_node *node)
 */
 t_color	ray_color(t_mlx *mlx, t_vec v)
 {
-	t_min	min;
-	t_node	*node;
 	t_node	*min_node;
 	t_color	ret;
 	t_vec	p;
 
-	min_node = NULL;
-	min.min = FLT_MAX;
-	node = mlx->objects_cpy.head.next;
-	// TODO min.min 초기화 안 됨
-	while (node != &mlx->objects_cpy.tail)
-	{
-		min.t = hit(node, v);
-		if (min.t > 0 && min.t < min.min)
-		{
-			min.min = min.t;
-			min_node = node;
-		}
-		node = node->next;
-	}
-	p = vadd(vmul(v, min.t), ZEROPOS);
-	if (min_node != NULL && check_shadow(mlx, p))
+	min_node = find_closest(mlx, v, &p);
+	if (min_node == NULL)
+		return ((t_color){0, 0, 0, 0});
+	else if (min_node != NULL && check_shadow(mlx, p))
 		return ((t_color){0, 0, 0, 0});
 	ret = (t_color){0, 0, 0, 0};
 	if (min_node)
 	{
 		ret = cadd(ret, cmul(mlx->light_ambient.col, mlx->light_ambient.bri));
-		ret = cadd(ret, phong(&mlx->lights_cpy, min_node, v, p));
+		ret = cadd(ret, phong(&mlx->lights_cpy, get_normal(min_node, p), p));
 	}
-	ret = cadd(ret, get_color(min_node));
-	return (ret);
+	return (cdot(get_color(min_node), ret));
 }
 
 /*
