@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 13:37:45 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/05 14:52:49 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ float	hit_cylinder(t_cylinder *cylinder, t_vec v)
 	d = b * b - a * c;
 	if (d < 0)
 		return (-1);
-	d = (-b - sqrt(d)) / (2.0 * a);
+	d = (-b - sqrt(d)) / a;
 	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
 	c = vdot(tmp, cylinder->ori);
 	if (0 < c && c < cylinder->hei && d > 0)
