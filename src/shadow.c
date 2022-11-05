@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:23:02 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 18:58:03 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 22:30:44 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vec	vec_to_light(t_vec p, t_node *node)
 	}
 	else
 		pos = p;
-	return (vsub(pos, p));
+	return (vnorm(vsub(pos, p)));
 }
 
 int	is_hit_anything(t_list *objects_cpy, t_vec vlight_length)

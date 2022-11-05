@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:29:21 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 20:40:58 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 22:33:30 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ t_vec	get_normal(t_node *node, t_vec p)
 	else if (node->type == TYPE_PLANE)
 	{
 		plane = node->content;
-		return (vnorm(vsub(p, plane->pos)));
+		return (vnorm(plane->ori));
 	}
 	else if (node->type == TYPE_CYLINDER)
 	{
+		// TODO
 		cylinder = node->content;
 		return (vnorm(vsub(p, cylinder->pos)));
 	}

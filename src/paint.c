@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 20:41:23 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 22:39:08 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_color	ray_color(t_mlx *mlx, t_vec v)
 	min_node = NULL;
 	min.min = FLT_MAX;
 	node = mlx->objects_cpy.head.next;
+	// TODO min.min 초기화 안 됨
 	while (node != &mlx->objects_cpy.tail)
 	{
 		min.t = hit(node, v);
