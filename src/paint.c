@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:39:21 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/06 05:43:09 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,12 @@ void	paint(t_mlx *mlx)
 		{
 			tmp = (int *)(mlx->img.addr + y * mlx->img.len \
 					+ x * mlx->img.bpp / 8);
-			v = vnorm((t_vec){
+			v = vnorm((t_vec){\
 				(x - (double)mlx->viewport.width / 2) / mlx->viewport.width \
-					* mlx->frustum.width,
+					* mlx->frustum.width, \
 				(y - (double)mlx->viewport.height / 2) / mlx->viewport.height \
-					* mlx->frustum.height,
-				-1,
-				0,
+					* mlx->frustum.height, \
+				-1, 0, \
 			});
 			color = ray_color(mlx, v);
 			*tmp = *(int *)(char [4]){color.b, color.g, color.r, color.t};
