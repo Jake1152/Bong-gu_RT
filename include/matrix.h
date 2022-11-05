@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 19:35:35 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 20:41:27 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:13:23 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAT_H
-# define MAT_H
+#ifndef MATRIX_H
+# define MATRIX_H
 
 # include "vector.h"
 

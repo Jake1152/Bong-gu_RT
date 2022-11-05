@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:57:09 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 20:16:30 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:14:50 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,17 @@ typedef struct s_list
 	t_node	tail;
 }	t_list;
 
-/*
-* object.c
-*/
 void	init_list(t_list *list);
 int		append_node(t_list *list, void *content, t_object_type type);
 void	clear_list(t_list *list);
 void	*copy_content(t_object_type type, void *content);
 int		copy_list(t_list *dst, t_list *src);
 
-/*
-* object3.c
-*/
-void	*content_light_spot(void* content);
-void	*content_sphere(void* content);
-void	*content_plane(void* content);
-void	*content_cylinder(void* content);
+void	*content_light_spot(void *content);
+void	*content_sphere(void *content);
+void	*content_plane(void *content);
+void	*content_cylinder(void *content);
 
-/*
-* object3.c
-*/
 int		add_list_lig_ret_space(void *mlx);
 int		add_list_shp_ret_char(void *mlx);
 int		add_list_pla_ret_char(void *mlx);

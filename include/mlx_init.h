@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:15:26 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 01:12:09 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:13:40 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,6 @@ typedef enum e_input
 {
 	MOUSE_LEFT = 1,
 	MOUSE_RIGHT = 2,
-	// MOUSE_UP = 4,
-	// MOUSE_DOWN = 5,
-	// KEY_C = 8,
-	// KEY_M = 46,
 	KEY_ESC = 53,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
