@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 03:07:19 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 03:47:44 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,5 @@ int	hit(t_node *node, t_vec v, float *t)
 	else if (node->type == TYPE_CYLINDER)
 		return (hit_cylinder((t_cylinder *)node->content, v, t));
 	else
-		return (-1);
+		return (0);
 }
