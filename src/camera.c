@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:41:11 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 12:27:32 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 04:04:28 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,14 @@ t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up, int look_is_orient)
 */
 t_mat	newCamera(t_vec position, t_vec orient)
 {
+	t_vec	up;
+	t_vec	tmp;
+
+	up = (t_vec){0, 1, 0, 0};
 	if (orient.x == 0 && orient.y == 0 && orient.z == 0)
 		orient = (t_vec){1, 1, 1, 0};
-	return (cameraLookAt(position, orient, (t_vec){0, 1, 0, 0}, 1));
+	tmp = vcross(orient, up);
+	if (vdot(tmp, tmp) < 0.000001)
+		up = vnorm((t_vec){1, 0, 0, 0});
+	return (cameraLookAt(position, orient, up, 1));
 }
