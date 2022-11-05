@@ -6,10 +6,11 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:23:02 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 22:30:44 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 03:09:17 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
 #include "shadow.h"
 #include "mlx_init.h"
 #include "vector.h"
@@ -37,11 +38,12 @@ int	is_hit_anything(t_list *objects_cpy, t_vec vlight_length)
 	float	t;
 	float	len;
 
+	t = FLT_MAX;
 	len = vlen(vlight_length);
 	node = objects_cpy->head.next;
 	while (node != &objects_cpy->tail)
 	{
-		t = hit(node, vnorm(vlight_length));
+		t = hit(node, vnorm(vlight_length), &t);
 		if (0 < t && t < len)
 			return (1);
 		node = node->next;

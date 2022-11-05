@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 21:21:53 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/06 03:07:19 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <float.h>
 #include "object.h"
 #include "hit.h"
 
-float	hit_sphere(t_sphere *sphere, t_vec v)
+int	hit_sphere(t_sphere *sphere, t_vec v, float *t)
 {
 	float	a;
 	float	b;
@@ -28,20 +29,20 @@ float	hit_sphere(t_sphere *sphere, t_vec v)
 	c = vdot(tmp, tmp) - sphere->dia * sphere->dia;
 	d = b * b - 4 * a * c;
 	if (d < 0)
-		return (-1);
-	d = (-b - sqrt(d)) / (2.0 * a);
-	if (d > 0.000001)
-		return (d);
-	d = b * b - 4 * a * c;
-	d = (-b + sqrt(d)) / (2.0 * a);
-	if (d > 0.000001)
-		return (d);
-	if (d < 0)
-		return (-1);
-	return (d);
+		return (0);
+	d = sqrt(d);
+	c = (-b - d) / (2.0 * a);
+	if (c < FLT_EPSILON || *t < c)
+	{
+		c = (-b + d) / (2.0 * a);
+		if (c < FLT_EPSILON || *t < c)
+			return (0);
+	}
+	*t = c;
+	return (1);
 }
 
-float	hit_plane(t_plane *plane, t_vec v)
+int	hit_plane(t_plane *plane, t_vec v, float *t)
 {
 	float	a;
 	float	b;
@@ -49,20 +50,34 @@ float	hit_plane(t_plane *plane, t_vec v)
 	a = vdot(v, plane->ori);
 	b = vdot(vsub(ZEROPOS, plane->pos), plane->ori);
 	if (a == 0)
-		return (-1);
+		return (0);
 	b = -b / a;
 	if (b < 0)
-		return (-1);
-	return (b);
+		return (0);
+	*t = b;
+	return (1);
 }
 
-float	hit_cylinder(t_cylinder *cylinder, t_vec v)
+int	is_cylinder_in(float root, t_vec v, t_cylinder *cylinder)
+{
+	t_vec	tmp;
+	float	c;
+
+	tmp = vsub(vadd(vmul(v, root), ZEROPOS), cylinder->pos);
+	c = vdot(tmp, cylinder->ori);
+	if (0 < c && c < cylinder->hei && root > 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	hit_cylinder(t_cylinder *cylinder, t_vec v, float *t)
 {
 	float	a;
 	float	b;
 	float	c;
-	t_vec	tmp;
 	float	d;
+	t_vec	tmp;
 
 	a = vdot(v, cylinder->ori);
 	a = vdot(v, v) - a * a;
@@ -73,24 +88,27 @@ float	hit_cylinder(t_cylinder *cylinder, t_vec v)
 		- cylinder->dia * cylinder->dia;
 	d = b * b - a * c;
 	if (d < 0)
-		return (-1);
-	d = (-b - sqrt(d)) / a;
-	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
-	c = vdot(tmp, cylinder->ori);
-	if (0 < c && c < cylinder->hei && d > 0)
-		return (d);
-	else
-		return (-1);
+		return (0);
+	d = sqrt(d);
+	c = (-b - d) / a;
+	if (!is_cylinder_in(c, v, cylinder) && (c < FLT_EPSILON || *t < c))
+	{
+		c = (-b + d) / a;
+		if (!is_cylinder_in(c, v, cylinder) && (c < FLT_EPSILON || *t < c))
+			return (0);
+	}
+	*t = c;
+	return (1);
 }
 
-float	hit(t_node *node, t_vec v)
+int	hit(t_node *node, t_vec v, float *t)
 {
 	if (node->type == TYPE_SPHERE)
-		return (hit_sphere((t_sphere *)node->content, v));
+		return (hit_sphere((t_sphere *)node->content, v, t));
 	else if (node->type == TYPE_PLANE)
-		return (hit_plane((t_plane *)node->content, v));
+		return (hit_plane((t_plane *)node->content, v, t));
 	else if (node->type == TYPE_CYLINDER)
-		return (hit_cylinder((t_cylinder *)node->content, v));
+		return (hit_cylinder((t_cylinder *)node->content, v, t));
 	else
 		return (-1);
 }

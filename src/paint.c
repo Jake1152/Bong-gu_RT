@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 02:03:49 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 02:51:56 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,21 @@ t_color	get_color(t_node *node)
 
 t_node	*find_closest(t_mlx *mlx, t_vec v, t_vec *p)
 {
-	float	min;
 	float	t;
 	t_node	*node;
-	t_node	*min_node;
+	t_node	*ret_node;
 
-	min = FLT_MAX;
 	t = FLT_MAX;
-	min_node = NULL;
+	ret_node = NULL;
 	node = mlx->objects_cpy.head.next;
 	while (node != &mlx->objects_cpy.tail)
 	{
-		t = hit(node, v);
-		if (0 < t && t < min) // TODO
-		{
-			min = t;
-			min_node = node;
-		}
+		if (hit(node, v, &t))
+			ret_node = node;
 		node = node->next;
 	}
 	*p = vadd(vmul(v, t), ZEROPOS);
-	return (min_node);
+	return (ret_node);
 }
 
 /*
