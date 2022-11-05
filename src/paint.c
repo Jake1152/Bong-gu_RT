@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 07:32:32 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 16:24:52 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 #include <float.h>
 #include "mlx_init.h"
 #include "vector.h"
+#include "paint.h"
 #include "camera.h"
 #include "object.h"
 #include "hit.h"
+#include "shadow.h"
+#include "phong.h"
 
 t_color	get_color(t_node *node)
 {
@@ -26,7 +29,7 @@ t_color	get_color(t_node *node)
 	t_cylinder	*cylinder;
 
 	if (node == NULL)
-		return ((t_color){0, 0, 0, 1});
+		return ((t_color){0, 0, 0, 0});
 	if (node->type == TYPE_SPHERE)
 	{
 		sphere = node->content;
@@ -43,7 +46,7 @@ t_color	get_color(t_node *node)
 		return (cylinder->col);
 	}
 	else
-		return ((t_color){0, 0, 0, 1});
+		return ((t_color){0, 0, 0, 0});
 }
 
 /*
@@ -53,27 +56,32 @@ t_color	get_color(t_node *node)
 */
 t_color	ray_color(t_mlx *mlx, t_vec v)
 {
-	float	min;
-	float	t;
+	t_min	min;
 	t_node	*node;
 	t_node	*min_node;
+	t_color	ret;
+	t_vec	p;
 
 	min_node = NULL;
-	min = FLT_MAX;
+	min.min = FLT_MAX;
 	node = mlx->objects_cpy.head.next;
 	while (node != &mlx->objects_cpy.tail)
 	{
-		t = hit(node, v);
-		if (t > 0 && t < min)
+		min.t = hit(node, v);
+		if (min.t > 0 && min.t < min.min)
 		{
-			min = t;
+			min.min = min.t;
 			min_node = node;
 		}
 		node = node->next;
 	}
-	return (get_color(min_node));
-	// 그림자 먼저 되는지 확인 TODO
-	// phong TODO 255 넘는지 0보다 작은지 체크
+	p = vadd(vmul(v, min.t), ZEROPOS);
+	if (check_shadow(mlx, p))
+		return ((t_color){0, 0, 0, 0});
+	ret = get_color(min_node);
+	ret = cadd(ret, cmul(mlx->light_ambient.col, mlx->light_ambient.bri));
+	ret = cadd(ret, phong(&mlx->lights, get_normal(min_node, p), v, p));
+	return (ret);
 }
 
 /*

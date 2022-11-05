@@ -6,16 +6,20 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:28:32 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 01:27:45 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 16:36:38 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONG_H
 # define PHONG_H
 
-// TODO
-// phong_ambient();
-// phong_diffuse();
-// phong_specular();
+# include "mlx_init.h"
+# include "vector.h"
+# include "object.h"
+# include "light.h"
+
+t_vec	get_normal(t_node *node, t_vec p);
+t_color	phong_specular(t_color color, t_vec norm, t_vec v);
+t_color	phong(t_list *lights, t_vec norm, t_vec v, t_vec p);
 
 #endif

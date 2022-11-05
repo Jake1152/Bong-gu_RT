@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 08:01:14 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 15:57:56 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ t_vec	vnorm(t_vec v);
 */
 t_vec	vmul(t_vec v, float c);
 t_vec	vmag(t_vec v, t_vec m);
+t_color	cadd(t_color c1, t_color c2);
+t_color	cmul(t_color c, float t);
 
 #endif
