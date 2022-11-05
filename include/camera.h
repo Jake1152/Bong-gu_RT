@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:39:48 by min-jo            #+#    #+#             */
-/*   Updated: 2022/10/29 17:31:21 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 10:45:39 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_frustum	newFrustumPerspect(float aspect, float fov);
 * Czx Czy Czz 0 | 0 0 1 -dz
 *   0   0   0 1 | 0 0 0  1
 */
-t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up);
+t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up, int look_is_orient);
 t_mat	newCamera(t_vec position, t_vec orient);
 
 #endif

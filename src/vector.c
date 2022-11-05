@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/03 23:56:00 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 12:25:17 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ float	vdot(t_vec v1, t_vec v2)
 t_vec	vcross(t_vec v1, t_vec v2)
 {
 	return ((t_vec){
-		.y = v1.y * v2.z - v1.z * v2.y,
-		.z = v1.z * v2.x - v1.x * v2.z,
-		.x = v1.x * v2.y - v1.y * v2.x,
+		.x = v1.y * v2.z - v1.z * v2.y,
+		.y = v1.z * v2.x - v1.x * v2.z,
+		.z = v1.x * v2.y - v1.y * v2.x,
 		.w = 0,
 	});
 }

@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:41:11 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 08:20:47 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 12:27:32 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_frustum	newFrustumPerspect(float aspect, float fov)
 * Czx Czy Czz 0 | 0 0 1 -dz
 *   0   0   0 1 | 0 0 0  1
 */
-t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up)
+t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up, int look_is_orient)
 {
 	t_mat	trans_inv;
 	t_mat	rotae_inv;
@@ -64,9 +64,12 @@ t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up)
 	t_vec	y;
 	t_vec	z;
 
-	z = vnorm(vsub(position, look));
+	if (look_is_orient)
+		z =	vsub(ZEROVEC, vnorm(look));
+	else
+		z = vnorm(vsub(position, look));
 	x = vnorm(vcross(z, up));
-	y = vcross(z, x);
+	y = vnorm(vcross(z, x));
 	rotae_inv.vecs[0] = x;
 	rotae_inv.vecs[1] = y;
 	rotae_inv.vecs[2] = z;
@@ -85,7 +88,6 @@ t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up)
 t_mat	newCamera(t_vec position, t_vec orient)
 {
 	if (orient.x == 0 && orient.y == 0 && orient.z == 0)
-		orient = vnorm((t_vec){1, 1, 1, 0});
-	return (cameraLookAt(position, vadd(position, vnorm(orient)),
-			(t_vec){0, 1, 0, 1}));
+		orient = (t_vec){1, 1, 1, 0};
+	return (cameraLookAt(position, orient, (t_vec){0, 1, 0, 0}, 1));
 }

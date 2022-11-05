@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 19:36:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 01:30:14 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 11:52:04 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ t_mat	mmul(t_mat m1, t_mat m2)
 
 t_vec	mmulvec(t_mat m, t_vec v)
 {
-	return ((t_vec){
-		.x = vdot(m.vecs[0], v),
-		.y = vdot(m.vecs[1], v),
-		.z = vdot(m.vecs[2], v),
-		.w = vdot(m.vecs[3], v),
-	});
+	t_vec	ret;
+
+	ret.x = vdot(m.vecs[0], v);
+	ret.y = vdot(m.vecs[1], v);
+	ret.z = vdot(m.vecs[2], v);
+	ret.w = vdot(m.vecs[3], v);
+	if (v.w == 0)
+		ret.w = 0;
+	return (ret);
 }
 
 t_mat	mtranslate(t_vec v)
