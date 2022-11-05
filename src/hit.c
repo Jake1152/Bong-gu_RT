@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 08:27:31 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 13:37:45 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ float	hit_cylinder(t_cylinder *cylinder, t_vec v)
 		- vdot(v, cylinder->ori) * vdot(tmp, cylinder->ori);
 	c = vdot(tmp, tmp) - vdot(tmp, cylinder->ori)
 		- cylinder->dia * cylinder->dia;
-	d = b * b - 4 * a * c;
+	d = b * b - a * c;
 	if (d < 0)
 		return (-1);
 	d = (-b - sqrt(d)) / (2.0 * a);
 	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
-	c = vdot(tmp, vmul(cylinder->ori, cylinder->hei));
-	if (0 <= c && c <= cylinder->hei && d > 0)
+	c = vdot(tmp, cylinder->ori);
+	if (0 < c && c < cylinder->hei && d > 0)
 		return (d);
 	else
 		return (-1);
