@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:23:02 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:15:49 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:29:22 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_hit_anything(t_list *objects_cpy, t_vec vlight_length)
 	float	t;
 	float	len;
 
-	t = FLT_MAX;
+	t = FLT_EPSILON;
 	len = vlen(vlight_length);
 	node = objects_cpy->head.next;
 	while (node != &objects_cpy->tail)
