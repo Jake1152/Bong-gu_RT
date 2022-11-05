@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 14:52:49 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/05 16:16:40 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ float	hit_cylinder(t_cylinder *cylinder, t_vec v)
 	tmp = vsub(ZEROPOS, cylinder->pos);
 	b = vdot(v, tmp)
 		- vdot(v, cylinder->ori) * vdot(tmp, cylinder->ori);
-	c = vdot(tmp, tmp) - vdot(tmp, cylinder->ori)
+	c = vdot(tmp, tmp) - vdot(tmp, cylinder->ori) * vdot(tmp, cylinder->ori)
 		- cylinder->dia * cylinder->dia;
 	d = b * b - a * c;
 	if (d < 0)
 		return (-1);
-	d = (-b - sqrt(d)) / a;
+	d = (-b - sqrt(d)) / a; // a가 음수가 된다면? +sqrt(d)도 고려해야할 수 있는가?
 	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
 	c = vdot(tmp, cylinder->ori);
 	if (0 < c && c < cylinder->hei && d > 0)
