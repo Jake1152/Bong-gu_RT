@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 18:35:08 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 18:58:09 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_color	ray_color(t_mlx *mlx, t_vec v)
 		}
 		node = node->next;
 	}
-	p = vadd(vmul(v, min.t * 0.9999), ZEROPOS);
+	p = vadd(vmul(v, min.t), ZEROPOS);
 	if (min_node != NULL && check_shadow(mlx, p))
 		return ((t_color){0, 0, 0, 0});
 	ret = get_color(min_node);

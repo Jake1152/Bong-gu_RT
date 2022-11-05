@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:23:02 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 18:26:11 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 18:58:03 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_hit_anything(t_list *objects_cpy, t_vec vlight_length)
 	while (node != &objects_cpy->tail)
 	{
 		t = hit(node, vnorm(vlight_length));
-		if (0 < t && len)
+		if (0 < t && t < len)
 			return (1);
 		node = node->next;
 	}
