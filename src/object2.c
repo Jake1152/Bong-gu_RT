@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:21:14 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:13:36 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:38:32 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	*content_plane(void *content)
 	return (ret);
 }
 
-void	*content_cylinder(void* content)
+void	*content_cylinder(void *content)
 {
 	t_cylinder	*origin;
 	t_cylinder	*ret;
@@ -94,24 +94,18 @@ void	*content_cylinder(void* content)
 		return (NULL);
 	origin = content;
 	ret->pos = (t_vec){
-		origin->pos.x,
-		origin->pos.y,
-		origin->pos.z,
-		origin->pos.w,
+		origin->pos.x, origin->pos.y,
+		origin->pos.z, origin->pos.w,
 	};
 	ret->ori = (t_vec){
-		origin->ori.x,
-		origin->ori.y,
-		origin->ori.z,
-		origin->ori.w,
+		origin->ori.x, origin->ori.y,
+		origin->ori.z, origin->ori.w,
 	};
 	ret->dia = origin->dia;
 	ret->hei = origin->hei;
 	ret->col = (t_color){
-		origin->col.r,
-		origin->col.g,
-		origin->col.b,
-		origin->col.t,
+		origin->col.r, origin->col.g,
+		origin->col.b, origin->col.t,
 	};
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rt2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:29:12 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 13:01:57 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:37:31 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	check_last(t_mlx *mlx, t_parse state, char c)
 	else if ((state == PARSE_RT_CAM_FOV_FLOAT || state == PARSE_RT_CAM_FOV_NUM)
 		&& '0' <= c && c <= '9')
 	{
-		mlx->frustum = newFrustumPerspect(
+		mlx->frustum = new_frustum_perspect(
 				mlx->viewport.aspect,
 				mlx->parse_cam.fov);
-		mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+		mlx->camera = new_camera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 		return (0);
 	}
 	else if (state == PARSE_RT_AMB_B || state == PARSE_RT_CYL_B

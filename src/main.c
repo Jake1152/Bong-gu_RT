@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:32:54 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:14:56 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:38:14 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static int	is_end_rt(char *str)
 	int	len;
 
 	len = str_len(str);
-	if (str[len-1] != 't')
+	if (str[len - 1] != 't')
 		return (0);
-	if (str[len-2] != 'r')
+	if (str[len - 2] != 'r')
 		return (0);
-	if (str[len-3] != '.')
+	if (str[len - 3] != '.')
 		return (0);
 	return (1);
 }

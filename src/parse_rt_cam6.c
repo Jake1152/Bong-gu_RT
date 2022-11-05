@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rt_cam6.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 22:42:41 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 00:02:39 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:37:31 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_parse	parse_rt_cam_fov_num(t_mlx *mlx, char c)
 	}
 	else if (c == '\n')
 	{
-		mlx->frustum = newFrustumPerspect(mlx->viewport.aspect,
+		mlx->frustum = new_frustum_perspect(mlx->viewport.aspect,
 				mlx->parse_cam.fov);
-		mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+		mlx->camera = new_camera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 		return (PARSE_RT_LINE);
 	}
 	else
@@ -65,9 +65,9 @@ t_parse	parse_rt_cam_fov_float(t_mlx *mlx, char c)
 	}
 	else if (c == '\n')
 	{
-		mlx->frustum = newFrustumPerspect(mlx->viewport.aspect,
+		mlx->frustum = new_frustum_perspect(mlx->viewport.aspect,
 				mlx->parse_cam.fov);
-		mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+		mlx->camera = new_camera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 		return (PARSE_RT_LINE);
 	}
 	else

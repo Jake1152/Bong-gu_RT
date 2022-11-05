@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:27:11 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:37:31 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	mlx_wrap_key_hook(int keycode, t_mlx *mlx)
 	else if (keycode == KEY_DOWN)
 		mlx->parse_cam.pos = vadd(mlx->parse_cam.pos,
 				vmul(mlx->parse_cam.ori, -0.1));
-	mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+	mlx->camera = new_camera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 	copy_transform(mlx);
 	mlx->needpaint = 1;
 	return (0);
@@ -66,7 +66,7 @@ int	mlx_wrap_loop_hook(t_mlx *mlx)
 		mlx_mouse_get_pos(mlx->win, &mlx->tmp_mouse.x, &mlx->tmp_mouse.y);
 	if (!mlx->needpaint && !mlx->move)
 		return (0);
-	mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
+	mlx->camera = new_camera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 	copy_transform(mlx);
 	paint(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);

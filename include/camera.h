@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:39:48 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:12:46 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/06 05:37:31 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_frustum
 	t_vec	bottom_left;
 }	t_frustum;
 
-t_frustum	newFrustumPerspect(float aspect, float fov);
-t_mat		cameraLookAt(t_vec position, t_vec look, t_vec up, \
+t_frustum	new_frustum_perspect(float aspect, float fov);
+t_mat		camera_look_at(t_vec position, t_vec look, t_vec up, \
 										int look_is_orient);
-t_mat		newCamera(t_vec position, t_vec orient);
+t_mat		new_camera(t_vec position, t_vec orient);
 
 #endif
