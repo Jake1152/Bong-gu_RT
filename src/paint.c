@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 18:58:09 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 20:41:23 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ t_color	ray_color(t_mlx *mlx, t_vec v)
 	p = vadd(vmul(v, min.t), ZEROPOS);
 	if (min_node != NULL && check_shadow(mlx, p))
 		return ((t_color){0, 0, 0, 0});
-	ret = get_color(min_node);
+	ret = (t_color){0, 0, 0, 0};
 	if (min_node)
 	{
 		ret = cadd(ret, cmul(mlx->light_ambient.col, mlx->light_ambient.bri));
-		ret = cadd(ret, phong(&mlx->lights_cpy, get_normal(min_node, p), v, p));
+		ret = cadd(ret, phong(&mlx->lights_cpy, min_node, v, p));
 	}
+	ret = cadd(ret, get_color(min_node));
 	return (ret);
 }
 

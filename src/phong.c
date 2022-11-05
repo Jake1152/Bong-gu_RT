@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:29:21 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 18:23:53 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 20:40:58 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "vector.h"
 #include "light.h"
 #include "shadow.h"
+#include "paint.h"
 
 t_vec	get_normal(t_node *node, t_vec p)
 {
@@ -44,25 +45,15 @@ t_vec	get_normal(t_node *node, t_vec p)
 		return ((t_vec){0, 0, 0, 0});
 }
 
-t_color	phong_specular(t_color color, t_vec norm, t_vec v)
-{
-	const float	ksn = 64;
-	const float	ks = 0.5;
-	t_vec		reflect;
-	float		spec;
-
-	reflect = vsub(v, vmul(norm, vdot(v, norm) * 2));
-	spec = powf(fmaxf(vdot(v, reflect), 0.0), ksn);
-	return (cmul(cmul(color, ks), spec));
-}
-
-t_color	phong(t_list *lights_cpy, t_vec norm, t_vec v, t_vec p)
+t_color	phong(t_list *lights_cpy, t_node *object_node, t_vec v, t_vec p)
 {
 	t_color			ret;
 	t_node			*node;
 	t_light_spot	*light;
 	t_vec			vlight;
+	t_vec			norm;
 
+	norm = get_normal(object_node, p);
 	ret = (t_color){0, 0, 0, 0};
 	node = lights_cpy->head.next;
 	while (node != &lights_cpy->tail)
@@ -71,8 +62,7 @@ t_color	phong(t_list *lights_cpy, t_vec norm, t_vec v, t_vec p)
 		if (node->type == TYPE_LIGHT_SPOT)
 		{
 			light = node->content;
-			ret = cadd(ret, cmul(light->col, fmaxf(vdot(norm, vlight), 0.0)));
-			ret = cadd(ret, phong_specular(light->col, norm, v));
+			ret = cadd(ret, cmul(get_color(object_node), fmaxf(vdot(norm, vlight), 0.0) * light->bri));
 		}
 		node = node->next;
 	}
