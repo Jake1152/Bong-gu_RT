@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 03:58:20 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/06 05:17:48 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	hit_sphere(t_sphere *sphere, t_vec v, float *t)
 	float	d;
 
 	a = vdot(v, v);
-	b = vdot(vmul(v ,2), vsub(ZEROPOS, sphere->pos));
+	b = vdot(vmul(v, 2), vsub(ZEROPOS, sphere->pos));
 	tmp = vsub(ZEROPOS, sphere->pos);
 	c = vdot(tmp, tmp) - sphere->dia * sphere->dia;
 	d = b * b - 4 * a * c;

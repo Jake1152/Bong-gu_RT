@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:29:21 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 01:59:25 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:21:20 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ t_vec	get_normal(t_node *node, t_vec p)
 	else if (node->type == TYPE_CYLINDER)
 	{
 		cylinder = node->content;
-		tmp = vnorm(vcross(vnorm(cylinder->ori), vnorm(vsub(p, cylinder->pos))));
+		tmp = vnorm(vcross(vnorm(cylinder->ori), \
+			vnorm(vsub(p, cylinder->pos))));
 		return (vnorm(vcross(tmp, cylinder->ori)));
 	}
-	else
-		return ((t_vec){0, 0, 0, 0});
+	return ((t_vec){0, 0, 0, 0});
 }
 
 t_color	phong(t_list *lights_cpy, t_vec norm, t_vec p)
@@ -62,7 +62,8 @@ t_color	phong(t_list *lights_cpy, t_vec norm, t_vec p)
 		if (node->type == TYPE_LIGHT_SPOT)
 		{
 			light = node->content;
-			ret = cadd(ret, cmul(light->col, fmaxf(vdot(norm, vlight), 0.0) * light->bri));
+			ret = cadd(ret, cmul(light->col, fmaxf(vdot(norm, vlight), 0.0) \
+				* light->bri));
 		}
 		node = node->next;
 	}

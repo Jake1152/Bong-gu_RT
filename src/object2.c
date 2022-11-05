@@ -6,14 +6,14 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:21:14 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/04 01:41:05 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:13:36 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "object.h"
 
-void	*content_light_spot(void* content)
+void	*content_light_spot(void *content)
 {
 	t_light_spot	*origin;
 	t_light_spot	*ret;
@@ -38,7 +38,7 @@ void	*content_light_spot(void* content)
 	return (ret);
 }
 
-void	*content_sphere(void* content)
+void	*content_sphere(void *content)
 {
 	t_sphere	*origin;
 	t_sphere	*ret;
@@ -63,7 +63,7 @@ void	*content_sphere(void* content)
 	return (ret);
 }
 
-void	*content_plane(void* content)
+void	*content_plane(void *content)
 {
 	t_plane	*origin;
 	t_plane	*ret;
@@ -73,22 +73,13 @@ void	*content_plane(void* content)
 		return (NULL);
 	origin = content;
 	ret->pos = (t_vec){
-		origin->pos.x,
-		origin->pos.y,
-		origin->pos.z,
-		origin->pos.w,
+		origin->pos.x, origin->pos.y, origin->pos.z, origin->pos.w,
 	};
 	ret->ori = (t_vec){
-		origin->ori.x,
-		origin->ori.y,
-		origin->ori.z,
-		origin->ori.w,
+		origin->ori.x, origin->ori.y, origin->ori.z, origin->ori.w,
 	};
 	ret->col = (t_color){
-		origin->col.r,
-		origin->col.g,
-		origin->col.b,
-		origin->col.t,
+		origin->col.r, origin->col.g, origin->col.b, origin->col.t,
 	};
 	return (ret);
 }

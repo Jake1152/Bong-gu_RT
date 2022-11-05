@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:35:28 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 06:24:17 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:16:42 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	mlx_wrap_key_hook(int keycode, t_mlx *mlx)
 		destroy(mlx);
 	else if (keycode == KEY_UP)
 		mlx->parse_cam.pos = vadd(mlx->parse_cam.pos,
-			vmul(mlx->parse_cam.ori, 0.1));
+				vmul(mlx->parse_cam.ori, 0.1));
 	else if (keycode == KEY_DOWN)
 		mlx->parse_cam.pos = vadd(mlx->parse_cam.pos,
-			vmul(mlx->parse_cam.ori, -0.1));
+				vmul(mlx->parse_cam.ori, -0.1));
 	mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 	copy_transform(mlx);
 	mlx->needpaint = 1;
@@ -65,14 +65,10 @@ int	mlx_wrap_mouse_hook(int button, int x, int y, t_mlx *mlx)
 */
 int	mlx_wrap_loop_hook(t_mlx *mlx)
 {
-	// t_mat	x;
-	// t_mat	y;
-
 	if (mlx->move)
 		mlx_mouse_get_pos(mlx->win, &mlx->tmp_mouse.x, &mlx->tmp_mouse.y);
 	if (!mlx->needpaint && !mlx->move)
 		return (0);
-	// mmulvec(mrotate(), ); TODO
 	mlx->camera = newCamera(mlx->parse_cam.pos, mlx->parse_cam.ori);
 	copy_transform(mlx);
 	paint(mlx);

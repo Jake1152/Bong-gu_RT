@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:23:02 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 03:39:33 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:15:49 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	is_hit_anything(t_list *objects_cpy, t_vec vlight_length)
 	return (0);
 }
 
-int check_shadow(t_mlx *mlx, t_vec p)
+int	check_shadow(t_mlx *mlx, t_vec p)
 {
 	t_node			*node;
 
