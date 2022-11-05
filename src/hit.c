@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 16:32:49 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 21:21:53 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ float	hit_sphere(t_sphere *sphere, t_vec v)
 	if (d < 0)
 		return (-1);
 	d = (-b - sqrt(d)) / (2.0 * a);
+	if (d > 0.000001)
+		return (d);
+	d = b * b - 4 * a * c;
+	d = (-b + sqrt(d)) / (2.0 * a);
+	if (d > 0.000001)
+		return (d);
 	if (d < 0)
 		return (-1);
 	return (d);
@@ -68,7 +74,7 @@ float	hit_cylinder(t_cylinder *cylinder, t_vec v)
 	d = b * b - a * c;
 	if (d < 0)
 		return (-1);
-	d = (-b - sqrt(d)) / a; // a가 음수가 된다면? +sqrt(d)도 고려해야할 수 있는가?
+	d = (-b - sqrt(d)) / a;
 	tmp = vsub(vadd(vmul(v, d), ZEROPOS), cylinder->pos);
 	c = vdot(tmp, cylinder->ori);
 	if (0 < c && c < cylinder->hei && d > 0)
