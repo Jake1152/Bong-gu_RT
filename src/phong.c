@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:29:21 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 16:47:21 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 18:23:53 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_color	phong_specular(t_color color, t_vec norm, t_vec v)
 	return (cmul(cmul(color, ks), spec));
 }
 
-t_color	phong(t_list *lights, t_vec norm, t_vec v, t_vec p)
+t_color	phong(t_list *lights_cpy, t_vec norm, t_vec v, t_vec p)
 {
 	t_color			ret;
 	t_node			*node;
@@ -64,8 +64,8 @@ t_color	phong(t_list *lights, t_vec norm, t_vec v, t_vec p)
 	t_vec			vlight;
 
 	ret = (t_color){0, 0, 0, 0};
-	node = lights->head.next;
-	while (node != &lights->tail)
+	node = lights_cpy->head.next;
+	while (node != &lights_cpy->tail)
 	{
 		vlight = vec_to_light(p, node);
 		if (node->type == TYPE_LIGHT_SPOT)

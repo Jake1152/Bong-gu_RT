@@ -6,11 +6,17 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 17:09:19 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 18:05:41 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "vector.h"
+
+float	vlen(t_vec v)
+{
+	return (sqrtf(v.x * v.x + v.y * v.y + v.z * v.z));
+}
 
 t_vec	vmul(t_vec v, float c)
 {

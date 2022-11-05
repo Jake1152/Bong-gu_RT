@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jim <jim@student.42.fr>                    +#+  +:+       +#+         #
+#    By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 16:17:45 by min-jo            #+#    #+#              #
-#    Updated: 2022/11/05 13:03:33 by jim              ###   ########.fr        #
+#    Updated: 2022/11/05 18:35:37 by min-jo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BSRC		=	$(addprefix $(SRC_DIR), $(BSRC_ORI))
 OBJ			=	$(SRC:.c=.o)
 BOBJ		=	$(BSRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror -MD -g #-fsanitize=address # TODO
+CFLAGS		+=	-Wall -Wextra -Werror -MD -g # -fsanitize=address # TODO
 CPPFLAGS	+=	-I $(HD_DIR) -I $(MLX_DIR)
 LIBADD		+=	-lm -lmlx -framework OpenGL -framework Appkit #-lpthread
 LDFLAGS		+=	-L$(MLX_DIR)

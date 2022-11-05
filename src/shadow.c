@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:23:02 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 16:38:00 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 18:26:11 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,21 @@ t_vec	vec_to_light(t_vec p, t_node *node)
 	}
 	else
 		pos = p;
-	return (vnorm(vsub(pos, p)));
+	return (vsub(pos, p));
 }
 
-int	is_hit_anything(t_list *objects, t_vec vlight)
+int	is_hit_anything(t_list *objects_cpy, t_vec vlight_length)
 {
 	t_node	*node;
+	float	t;
+	float	len;
 
-	node = objects->head.next;
-	while (node != &objects->tail)
+	len = vlen(vlight_length);
+	node = objects_cpy->head.next;
+	while (node != &objects_cpy->tail)
 	{
-		if (hit(node, vlight) != -1)
+		t = hit(node, vnorm(vlight_length));
+		if (0 < t && len)
 			return (1);
 		node = node->next;
 	}
@@ -49,10 +53,10 @@ int check_shadow(t_mlx *mlx, t_vec p)
 {
 	t_node			*node;
 
-	node = mlx->lights.head.next;
-	while (node != &mlx->lights.tail)
+	node = mlx->lights_cpy.head.next;
+	while (node != &mlx->lights_cpy.tail)
 	{
-		if (is_hit_anything(&mlx->objects, vec_to_light(p, node)))
+		if (is_hit_anything(&mlx->objects_cpy, vec_to_light(p, node)))
 			return (1);
 		node = node->next;
 	}
