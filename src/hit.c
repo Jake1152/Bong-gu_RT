@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 21:52:43 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:17:48 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:32:10 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	hit_sphere(t_sphere *sphere, t_vec v, float *t)
 	float	d;
 
 	a = vdot(v, v);
-	b = vdot(vmul(v, 2), vsub(ZEROPOS, sphere->pos));
-	tmp = vsub(ZEROPOS, sphere->pos);
+	b = vdot(vmul(v, 2), vsub((t_vec){0, 0, 0, 1}, sphere->pos));
+	tmp = vsub((t_vec){0, 0, 0, 1}, sphere->pos);
 	c = vdot(tmp, tmp) - sphere->dia * sphere->dia;
 	d = b * b - 4 * a * c;
 	if (d < 0)
@@ -48,7 +48,7 @@ int	hit_plane(t_plane *plane, t_vec v, float *t)
 	float	b;
 
 	a = vdot(v, plane->ori);
-	b = vdot(vsub(ZEROPOS, plane->pos), plane->ori);
+	b = vdot(vsub((t_vec){0, 0, 0, 1}, plane->pos), plane->ori);
 	if (a == 0)
 		return (0);
 	b = -b / a;
@@ -63,7 +63,7 @@ int	is_cylinder_in(float root, t_vec v, t_cylinder *cylinder)
 	t_vec	tmp;
 	float	height;
 
-	tmp = vsub(vadd(vmul(v, root), ZEROPOS), cylinder->pos);
+	tmp = vsub(vadd(vmul(v, root), (t_vec){0, 0, 0, 1}), cylinder->pos);
 	height = vdot(tmp, cylinder->ori);
 	if (height < 0 || height > cylinder->hei)
 		return (0);
@@ -80,7 +80,7 @@ int	hit_cylinder(t_cylinder *cylinder, t_vec v, float *t)
 	t_vec	tmp;
 
 	a = vdot(v, v) - vdot(v, cylinder->ori) * vdot(v, cylinder->ori);
-	tmp = vsub(ZEROPOS, cylinder->pos);
+	tmp = vsub((t_vec){0, 0, 0, 1}, cylinder->pos);
 	b = vdot(v, tmp)
 		- vdot(v, cylinder->ori) * vdot(tmp, cylinder->ori);
 	c = vdot(tmp, tmp) - vdot(tmp, cylinder->ori) * vdot(tmp, cylinder->ori)

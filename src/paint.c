@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:10:22 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:25:10 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:32:12 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_node	*find_closest(t_mlx *mlx, t_vec v, t_vec *p)
 			ret_node = node;
 		node = node->next;
 	}
-	*p = vadd(vmul(v, t), ZEROPOS);
+	*p = vadd(vmul(v, t), (t_vec){0, 0, 0, 1});
 	return (ret_node);
 }
 

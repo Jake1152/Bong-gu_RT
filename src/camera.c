@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:41:11 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:12:29 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/06 05:31:34 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_mat	cameraLookAt(t_vec position, t_vec look, t_vec up, int look_is_orient)
 	t_vec	z;
 
 	if (look_is_orient)
-		z = vsub(ZEROVEC, vnorm(look));
+		z = vsub((t_vec){0, 0, 0, 0}, vnorm(look));
 	else
 		z = vnorm(vsub(position, look));
 	x = vnorm(vcross(z, up));

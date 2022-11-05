@@ -3,27 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:03:24 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/06 05:20:10 by jim              ###   ########.fr       */
+/*   Updated: 2022/11/06 05:32:32 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-typedef struct	s_vec t_vec;
-# define ZEROVEC (t_vec){0, 0, 0, 0}
-# define ZEROPOS (t_vec){0, 0, 0, 1}
-
-struct s_vec
+typedef struct s_vec
 {
 	float	x;
 	float	y;
 	float	z;
 	float	w;
-};
+}	t_vec;
 
 typedef struct s_color
 {
