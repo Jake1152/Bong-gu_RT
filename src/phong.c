@@ -6,11 +6,12 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:29:21 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 16:36:31 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 16:47:21 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stddef.h>
 #include "phong.h"
 #include "vector.h"
 #include "light.h"
@@ -22,6 +23,8 @@ t_vec	get_normal(t_node *node, t_vec p)
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 
+	if (node == NULL)
+		return ((t_vec){0, 0, 0, 0});
 	if (node->type == TYPE_SPHERE)
 	{
 		sphere = node->content;
