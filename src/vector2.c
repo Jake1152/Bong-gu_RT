@@ -6,7 +6,7 @@
 /*   By: min-jo <min-jo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:23:57 by min-jo            #+#    #+#             */
-/*   Updated: 2022/11/05 16:34:49 by min-jo           ###   ########.fr       */
+/*   Updated: 2022/11/05 17:09:19 by min-jo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,24 @@ t_vec	vmag(t_vec v, t_vec m)
 	});
 }
 
-static unsigned char	min(unsigned char c1, unsigned char c2)
+static unsigned char	sumovf(unsigned char c1, unsigned char c2)
 {
-	if (c1 > c2)
-		return (c2);
+	unsigned char	sum;
+
+	sum = c1 + c2;
+	if (sum < c1 || sum < c2)
+		return (255);
 	else
-		return (c1);
+		return (sum);
 }
 
 t_color	cadd(t_color c1, t_color c2)
 {
 	return ((t_color){
-		.r = min(c1.r + c2.r, 255),
-		.g = min(c1.g + c2.g, 255),
-		.b = min(c1.b + c2.b, 255),
-		.t = min(c1.t + c2.t, 255),
+		.r = sumovf(c1.r , c2.r),
+		.g = sumovf(c1.g , c2.g),
+		.b = sumovf(c1.b , c2.b),
+		.t = 0,
 	});
 }
 
@@ -56,6 +59,6 @@ t_color	cmul(t_color c, float t)
 		.r = c.r * t,
 		.g = c.g * t,
 		.b = c.b * t,
-		.t = c.t * t,
+		.t = 0,
 	});
 }
